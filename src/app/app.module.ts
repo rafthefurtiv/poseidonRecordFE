@@ -13,13 +13,18 @@ import {MatCardModule} from '@angular/material/card';
 import { AtletiComponent } from './atleti/atleti.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTableModule} from '@angular/material/table';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { AddRecordComponent } from './add-record/add-record.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MenuComponent,
-    AtletiComponent
+    AtletiComponent,
+    AddRecordComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,10 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatCardModule,
     MatAutocompleteModule,
-    MatTableModule
+    MatTableModule,
+    NgbModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
