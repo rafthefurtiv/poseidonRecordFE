@@ -22,7 +22,8 @@ export class AddRecordComponent implements OnInit {
   stili: Array<Stili> = [];
   atleti: Array<Atleta> = [];
   metri = this.recordService.getMetriList();
-  record = {idUtente : null, metri: null, idStile: null, idCategoria: null, minuti: null, secondi: null, centesimi: null};
+  record = {idUtente : null, metri: null, idStile: null, idCategoria: null, minuti: null, secondi: null, centesimi: null,
+            vasca: null};
 
   constructor(private recordService: RecordService) { }
 

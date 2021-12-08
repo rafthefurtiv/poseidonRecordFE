@@ -37,6 +37,14 @@
           <option *ngFor="let stile of stili; index as i;" [value]="stile.id">{{stile.descrizioneBreve}}</option>
         </select>
       </div>
+
+      <div class="col-md-4 space">
+        <label>Vasca</label>
+        <select class="browser-default custom-select" required [(ngModel)]="record.vasca" #vasca="ngModel">
+          <option value="0">LUNGA</option>
+          <option value="1">CORTA</option>
+        </select>
+      </div>
     </div>
 
     <div class="row center">
@@ -59,7 +67,7 @@
     <div class="row center big-space">
       <div class="col-md-12">
         <button [disabled]="!idUtente.valid || !idCategoria.valid || !idMetri.valid || !idStile.valid
-        || !minuti.valid || !secondi.valid || !centesimi.valid"
+        || !minuti.valid || !secondi.valid || !centesimi.valid || !vasca.valid"
                 (click)="salva();" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Tooltip on right">
           Salva
         </button>
