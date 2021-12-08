@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-12" style="text-align: center;">
+    <h1>ADD RECORD</h1>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="form-group">
+    <div class="row">
+
+      <div class="col-md-4 space">
+        <label>Atleta</label>
+        <select class="browser-default custom-select form-control" required [(ngModel)]="record.idUtente" name="idUtente"
+        id="idUtente" #idUtente="ngModel">
+          <option *ngFor="let atleta of atleti; index as i;" [value]="atleta.id">{{atleta.nome}} {{atleta.cognome}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 space">
+        <label>Categoria</label>
+        <select class="browser-default custom-select" required [(ngModel)]="record.idCategoria" id="idCategoria" name="idCategoria" #idCategoria="ngModel">
+          <option *ngFor="let cat of categorie; index as i;" [value]="cat.id">{{cat.codiceCategoria}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 space">
+        <label>Metri</label>
+        <select class="browser-default custom-select" required [(ngModel)]="record.metri" id="idMetri" name="idMetri" #idMetri="ngModel">
+          <option *ngFor="let met of metri; index as i;" [value]="met">{{met}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 space">
+        <label>Stile</label>
+        <select class="browser-default custom-select" required [(ngModel)]="record.idStile" #idStile="ngModel">
+          <option *ngFor="let stile of stili; index as i;" [value]="stile.id">{{stile.descrizioneBreve}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row center">
+      <div class="col-md-12 space">
+        <label>Tempo</label>
+      </div>
+    </div>
+    <div class="row center">
+      <div class="col-md-4 space">
+        <input type="number" placeholder="minuti" required [(ngModel)]="record.minuti" #minuti="ngModel">'
+      </div>
+      <div class="col-md-4 space">
+        <input type="number" placeholder="secondi" required [(ngModel)]="record.secondi" #secondi="ngModel">"
+      </div>
+      <div class="col-md-4 space">
+        <input type="number" placeholder="centesimi" required [(ngModel)]="record.centesimi" #centesimi="ngModel">
+      </div>
+    </div>
+
+    <div class="row center big-space">
+      <div class="col-md-12">
+        <button [disabled]="!idUtente.valid || !idCategoria.valid || !idMetri.valid || !idStile.valid
+        || !minuti.valid || !secondi.valid || !centesimi.valid"
+                (click)="salva();" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Tooltip on right">
+          Salva
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+

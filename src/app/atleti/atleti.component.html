@@ -1,0 +1,72 @@
+
+<mat-grid-list cols="1" rowHeight="50px">
+  <mat-grid-tile colspan="1" rowspan="1"><h1>ATLETI</h1></mat-grid-tile>
+</mat-grid-list>
+
+
+<div class="row">
+  <div class="col-md-12" style="text-align: center;">
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Number"
+           matInput
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let atleta of atleti" [value]="atleta">
+        {{atleta}}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+</div>
+
+
+
+<div class="container" style="margin-top: 100px;">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Atleta</th>
+      <th scope="col">Username</th>
+      <th scope="col">Sesso</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let atleta of atletiList; index as i">
+    <tr (click)="atleta.display = !atleta.display;"  data-toggle="collapse" data-target="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
+        <td>{{ atleta.nome }} {{atleta.cognome}}</td>
+        <td>{{ atleta.username }}</td>
+        <td>{{ atleta.codiceSesso }}</td>
+    </tr>
+    <tr [class]="{'mostrato': atleta.display, 'hidden': !atleta.display}" >
+      <td colspan="3">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Gara</th>
+            <th scope="col">Vasca</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Tempo</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let gara of atleta.gare; index as i">
+          <tr>
+            <td>{{ gara.nomeGara }}</td>
+            <td>{{ gara.vasca }}</td>
+            <td>{{ gara.categoria }}</td>
+            <td>{{ calcolaTempo(gara.tempo) }}</td>
+          </tr>
+
+          </tbody>
+        </table>
+      </td>
+
+
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
