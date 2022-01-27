@@ -17,7 +17,7 @@ export class RecordService {
   stiliData: Array<Stili> = [];
   categorie: Observable<Array<Categorie>> = new Observable<Array<Categorie>>();
   records: Array<Record> = [];
-  local: string = "http://localhost:8080/poseidonRecord";
+  local: string = "http://195.20.241.70:8080/poseidonRecord";
   stiliCaricati: boolean = false;
   categorieCaricate: boolean = false;
   //record: string = "/record";
