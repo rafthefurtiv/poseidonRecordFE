@@ -19,3 +19,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-align: center;
 }
 
+.title{
+  margin-top: 20px;
+}
+
+.error-message{
+  color: red;
+}
+
+.r1{
+  margin-top: 10px;
+}
+.r2{
+  margin-top: 20px;
+}

@@ -1,31 +1,37 @@
 
-<div class="row">
-  <div class="col-md-12" style="text-align: center;">
+<div class="row r1">
+  <div class="col-md-12 title" style="text-align: center;">
     <h1>LOGIN</h1>
   </div>
 </div>
 
 
-<div class="row">
+<div class="row r1">
   <div class="col-md-12" style="text-align: center;">
-    <input matInput type="text" title="Username" placeholder="Username">
+    <input matInput type="text" title="Username" placeholder="Username" [(ngModel)]="username">
   </div>
 </div>
 
-<div class="row">
+<div class="row r1">
   <div class="col-md-12" style="text-align: center;">
-    <input matInput type="text" title="Password" placeholder="Password">
+    <input matInput type="password" title="Password" placeholder="Password" [(ngModel)]="password">
   </div>
 </div>
 
-<div class="row">
+<div class="row r2">
   <div class="col-md-12" style="text-align: center;">
-    <button [routerLink]="['/menu']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Tooltip on right">
+    <button (click)="login()" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Tooltip on right">
       Enter
     </button>
   </div>
 </div>
 
+
+<div class="row r2">
+  <div class="col-md-12" style="text-align: center;">
+    <p class="error-message">{{errorMessage}}</p>
+  </div>
+</div>
 
 
 

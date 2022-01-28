@@ -33,7 +33,6 @@ export class AtletiComponent implements OnInit {
   ngOnInit(): void {
     this.recordService.getAllRecords()
         .subscribe((data: Array<Record>) => {
-          console.log("Stampa array:  ");
           console.log(data);
           this.atletiList = data;
         });

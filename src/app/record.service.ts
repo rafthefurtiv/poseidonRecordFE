@@ -17,7 +17,8 @@ export class RecordService {
   stiliData: Array<Stili> = [];
   categorie: Observable<Array<Categorie>> = new Observable<Array<Categorie>>();
   records: Array<Record> = [];
-  local: string = "http://195.20.241.70:8080/poseidonRecord";
+  //local: string = "http://195.20.241.70:8080/poseidonRecord";
+  local: string = "http://localhost:8080/poseidonRecord";
   stiliCaricati: boolean = false;
   categorieCaricate: boolean = false;
   //record: string = "/record";
@@ -36,6 +37,10 @@ export class RecordService {
 
   getStiliList() {
     return this.http.get<Array<Stili>>(this.local+"/record/stili");
+  }
+
+  getAuth(user: String, pass: String) {
+     return this.http.get<boolean>(this.local+"/utenti/login?user="+user+"&pass="+pass);
   }
 
 /*

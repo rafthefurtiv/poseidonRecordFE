@@ -1,6 +1,8 @@
-<mat-grid-list cols="1" rowHeight="50px">
-  <mat-grid-tile colspan="1" rowspan="1"><h1>MENU</h1></mat-grid-tile>
-</mat-grid-list>
+<div class="row r1">
+  <div class="col-md-12 title" style="text-align: center;">
+    <h1>MENU</h1>
+  </div>
+</div>
 
 
 <mat-grid-list cols="2" rowHeight="500px">
@@ -9,10 +11,10 @@
       <mat-card-title>Ricerca atleti</mat-card-title>
       <mat-card-subtitle>Ricerca per atleta</mat-card-subtitle>
       <mat-card-actions>
-        <button [routerLink]="['/atleti']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Tooltip on right">
+        <button [routerLink]="['/atleti']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Ricerca gare per atleta">
           Cerca
         </button>
-        <button [routerLink]="['/add-record']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Tooltip on right">
+        <button [routerLink]="['/add-record']" *ngIf="true" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare">
           Add record
         </button>
       </mat-card-actions>
