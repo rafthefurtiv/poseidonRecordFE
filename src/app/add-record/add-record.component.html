@@ -1,6 +1,20 @@
-<div class="row">
-  <div class="col-md-12" style="text-align: center;">
+<div class="row r1">
+  <div class="col-md-12 title" style="text-align: center;">
     <h1>ADD RECORD</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 space" [ngClass]="{'error-box': errorMessage.length > 0, 'success-box': message.length > 0}">
+
+      <div *ngIf="errorMessage.length > 0">
+        {{errorMessage}}
+      </div>
+      <div *ngIf="message.length > 0">
+        {{message}}
+      </div>
+    </div>
   </div>
 </div>
 

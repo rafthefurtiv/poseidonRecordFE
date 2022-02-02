@@ -33,3 +33,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .r2{
   margin-top: 20px;
 }
+
+.error-box{
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 25px;
+  background-color: #ff003052;
+  color: #dc3545;
+  border-radius: 5px;
+  padding: 13px;
+}
+
+.success-box{
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 25px;
+  background-color: #69f0ae6b;
+  color: #28a745;
+  border-radius: 5px;
+  padding: 13px;
+}

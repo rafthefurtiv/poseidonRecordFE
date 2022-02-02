@@ -3,9 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Record } from './record';
+import { RecordDto } from './record-dto';
 import { Stili } from './stili';
 import { Categorie } from './categorie';
 import { Atleta } from './atleta';
+import { Esito } from './esito';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -67,6 +69,10 @@ export class RecordService {
   getMetriList() {
     return   this.metri;
     //return this.http.get<Array<Metri>>(this.local+"/record/metri");
+  }
+
+  saveRecord(record:  RecordDto) {
+    return this.http.post<Esito>(this.local+"/record/new", record, {});
   }
 
 }
