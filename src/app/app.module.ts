@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { AddRecordComponent } from './add-record/add-record.component';
 import { FormsModule } from '@angular/forms';
+import { SocietariComponent } from './societari/societari.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     MenuComponent,
     AtletiComponent,
-    AddRecordComponent
+    AddRecordComponent,
+    SocietariComponent
   ],
   imports: [
     BrowserModule,

@@ -66,6 +66,10 @@ export class RecordService {
     return this.http.get<Array<Categorie>>(this.local+"/record/categorie");
   }
 
+  getSocietari() {
+    return this.http.get<Array<Record>>(this.local+"/record/record-societari");
+  }
+
   getMetriList() {
     return   this.metri;
     //return this.http.get<Array<Metri>>(this.local+"/record/metri");
