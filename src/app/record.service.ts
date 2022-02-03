@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Record } from './record';
+import { RecordSocietario } from './record-societario';
 import { RecordDto } from './record-dto';
 import { Stili } from './stili';
 import { Categorie } from './categorie';
@@ -67,7 +68,7 @@ export class RecordService {
   }
 
   getSocietari() {
-    return this.http.get<Array<Record>>(this.local+"/record/record-societari");
+    return this.http.get<Array<RecordSocietario>>(this.local+"/record/record-societari");
   }
 
   getMetriList() {

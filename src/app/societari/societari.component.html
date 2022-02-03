@@ -4,12 +4,36 @@
   </div>
 </div>
 
-
+<div class="row">
+  <div class="col-md-4 center">
+    <input placeholder="Categoria">
+  </div>
+  <div class="col-md-4 center">
+    <input placeholder="Stile">
+  </div>
+  <div class="col-md-4 center">
+    <input placeholder="Metri">
+  </div>
+  <div class="col-md-4 center">
+    <input placeholder="Sesso">
+  </div>
+</div>
 
 <div class="row">
-  <div class="col-md-4" *ngFor="let gara of gare">
+  <div class="col-md-4" *ngFor="let gara of gare" style="padding: 35px;">
 
-  {{gara.username}}
+    <div style="padding: 16px; border-radius: 4px; border: solid 1px;">
+      <p>
+        {{gara.nome}} {{gara.cognome}}
+      </p>
+      <p>
+        {{gara.codiceSesso}} {{gara.gara.nomeGara}} {{gara.gara.categoria}}
+      </p>
+      <p>
+        {{gara.gara.vasca}} {{gara.gara.tempo}}
+      </p>
+    </div>
+
 
   </div>
 </div>

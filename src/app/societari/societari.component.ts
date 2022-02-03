@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecordService } from '../record.service';
-import { Record } from '../record';
+import { RecordSocietario } from '../record-societario';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { Record } from '../record';
 export class SocietariComponent implements OnInit {
 
   message: string = "";
-  gare: Array<Record> = [];
+  gare: Array<RecordSocietario> = [];
 
   constructor(private recordService: RecordService) {
          //let societariCall = this.recordService.getSocietari();
