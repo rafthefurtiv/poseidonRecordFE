@@ -4,36 +4,63 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-4 center">
-    <input placeholder="Categoria">
-  </div>
-  <div class="col-md-4 center">
-    <input placeholder="Stile">
-  </div>
-  <div class="col-md-4 center">
-    <input placeholder="Metri">
-  </div>
-  <div class="col-md-4 center">
-    <input placeholder="Sesso">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 space">
+      <label>Categoria</label>
+      <select class="browser-default custom-select" required [(ngModel)]="categoria"
+              id="categoria">
+        <option *ngFor="let cat of categorie; index as i;" [value]="cat.codiceCategoria">{{cat.codiceCategoria}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-4 space">
+      <label>Metri</label>
+      <select class="browser-default custom-select" required [(ngModel)]="metri">
+        <option *ngFor="let met of metriOption; index as i;" [value]="met">{{met}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-4 space">
+      <label>Stile</label>
+      <select class="browser-default custom-select" required [(ngModel)]="stile">
+        <option *ngFor="let stile of stili; index as i;" [value]="stile.id">{{stile.descrizioneBreve}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-4 space">
+      <label>Vasca</label>
+      <select class="browser-default custom-select" required [(ngModel)]="vasca">
+        <option value="0">LUNGA</option>
+        <option value="1">CORTA</option>
+      </select>
+    </div>
+
+    <div class="col-md-4 space">
+      <label>Sesso</label>
+      <select class="browser-default custom-select" required [(ngModel)]="sesso">
+        <option value="0">Maschi</option>
+        <option value="1">Femmine</option>
+      </select>
+    </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-4" *ngFor="let gara of gare" style="padding: 35px;">
-
-    <div style="padding: 16px; border-radius: 4px; border: solid 1px;">
-      <p>
-        {{gara.nome}} {{gara.cognome}}
-      </p>
-      <p>
-        {{gara.codiceSesso}} {{gara.gara.nomeGara}} {{gara.gara.categoria}}
-      </p>
-      <p>
-        {{gara.gara.vasca}} {{gara.gara.tempo}}
-      </p>
+  <div *ngFor="let gara of gare">
+    <div class="col-md-4" *ngIf="checkVisibility(gara)" style="padding: 35px;">
+      <div style="padding: 16px; border-radius: 4px; border: solid 1px;">
+        <p>
+          {{gara.nome}} {{gara.cognome}}
+        </p>
+        <p>
+          {{gara.codiceSesso}} {{gara.gara.nomeGara}} {{gara.gara.categoria}}
+        </p>
+        <p>
+          {{gara.gara.vasca}} {{gara.gara.tempo}}
+        </p>
+      </div>
     </div>
-
-
   </div>
+
 </div>
