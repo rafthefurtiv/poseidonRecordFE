@@ -9,46 +9,46 @@
     <div class="col-md-4 space">
       <label>Categoria</label>
       <select class="browser-default custom-select" required [(ngModel)]="categoria"
-              id="categoria">
+              id="categoria" (change)="cambiaGare()">
         <option *ngFor="let cat of categorie; index as i;" [value]="cat.codiceCategoria">{{cat.codiceCategoria}}</option>
       </select>
     </div>
 
     <div class="col-md-4 space">
       <label>Metri</label>
-      <select class="browser-default custom-select" required [(ngModel)]="metri">
+      <select class="browser-default custom-select" required [(ngModel)]="metri" (change)="cambiaGare()">
         <option *ngFor="let met of metriOption; index as i;" [value]="met">{{met}}</option>
       </select>
     </div>
 
     <div class="col-md-4 space">
       <label>Stile</label>
-      <select class="browser-default custom-select" required [(ngModel)]="stile">
-        <option *ngFor="let stile of stili; index as i;" [value]="stile.id">{{stile.descrizioneBreve}}</option>
+      <select class="browser-default custom-select" required [(ngModel)]="stile" (change)="cambiaGare()">
+        <option *ngFor="let stile of stili; index as i;" [value]="stile.descrizione">{{stile.descrizioneBreve}}</option>
       </select>
     </div>
 
     <div class="col-md-4 space">
       <label>Vasca</label>
-      <select class="browser-default custom-select" required [(ngModel)]="vasca">
-        <option value="0">LUNGA</option>
-        <option value="1">CORTA</option>
+      <select class="browser-default custom-select" required [(ngModel)]="vasca" (change)="cambiaGare()">
+        <option value="Lunga">LUNGA</option>
+        <option value="Corta">CORTA</option>
       </select>
     </div>
 
     <div class="col-md-4 space">
       <label>Sesso</label>
-      <select class="browser-default custom-select" required [(ngModel)]="sesso">
-        <option value="0">Maschi</option>
-        <option value="1">Femmine</option>
+      <select class="browser-default custom-select" required [(ngModel)]="sesso" (change)="cambiaGare()">
+        <option value="M">Maschi</option>
+        <option value="F">Femmine</option>
       </select>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div *ngFor="let gara of gare">
-    <div class="col-md-4" *ngIf="checkVisibility(gara)" style="padding: 35px;">
+  <div class="col-md-3" *ngFor="let gara of gareFiltrate">
+    <div class="col-md-12" *ngIf="checkVisibility(gara)" style="padding: 35px;">
       <div style="padding: 16px; border-radius: 4px; border: solid 1px;">
         <p>
           {{gara.nome}} {{gara.cognome}}

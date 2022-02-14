@@ -23,6 +23,7 @@ export class SocietariComponent implements OnInit {
   metriOption = this.recordService.getMetriList();
   message: string = "";
   gare: Array<RecordSocietario> = [];
+  gareFiltrate: Array<RecordSocietario> = [];
 
   constructor(private recordService: RecordService) {
          //let societariCall = this.recordService.getSocietari();
@@ -46,27 +47,46 @@ export class SocietariComponent implements OnInit {
         })
   }
 
+
+  getRicerca(){
+      if(this.metri != null && this.metri != undefined && this.metri != "" ||
+        this.stile != null && this.stile != undefined && this.stile != "" ||
+        this.categoria != null && this.categoria != undefined && this.categoria != "" ||
+        this.vasca != null && this.vasca != undefined && this.vasca != "" ||
+        this.sesso != null && this.sesso != undefined && this.sesso != ""
+      ){
+        return true;
+      }
+      return false;
+  }
+
+
   checkVisibility(gara: RecordSocietario){
     let ricerca = false;
     let takeGara = true;
 
-    if(this.metri != null && this.metri != undefined && this.metri != "" ||
-      this.stile != null && this.stile != undefined && this.stile != "" ||
-      this.categoria != null && this.categoria != undefined && this.categoria != ""
-    ){
+    if(this.getRicerca()){
       ricerca = true;
     }
 
     if(ricerca){
-      if(this.metri != "" && !gara.gara.nomeGara.includes(this.metri)){
+      if(this.metri != "" && gara.gara.metri != this.metri){
         takeGara = false;
       }
 
-      if(this.stile != "" && !gara.gara.nomeGara.includes(this.stile)){
+      if(this.stile != "" && gara.gara.stile != this.stile){
         takeGara = false;
       }
 
-      if(gara.gara.categoria != this.categoria){
+      if(this.categoria != "" && gara.gara.categoria != this.categoria){
+        takeGara = false;
+      }
+
+      if(this.vasca != "" && gara.gara.vasca != this.vasca){
+        takeGara = false;
+      }
+
+      if(this.sesso != "" && gara.codiceSesso != this.sesso){
         takeGara = false;
       }
 
@@ -75,8 +95,24 @@ export class SocietariComponent implements OnInit {
     else{
       return true;
     }
-
-
   }
+
+
+
+  cambiaGare(){
+    console.log("ricalcola");
+    this.gareFiltrate = [];
+    if(this.getRicerca()){
+      this.gareFiltrate = this.gare.filter(g => this.checkVisibility(g));
+    }
+    else{
+      this.gareFiltrate = this.gare;
+    }
+  }
+
+
+
+
+
 
 }

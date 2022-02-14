@@ -4,5 +4,7 @@ export class Gara {
   vasca: string = "";
   categoria: string = "";
   tempo: number = 0;
+  metri: string = "";
+  stile: string = "";
 
 }
