@@ -65,10 +65,13 @@
           {{gara.nome}} {{gara.cognome}}
         </p>
         <p>
-          {{gara.codiceSesso}} {{gara.gara.nomeGara}} {{gara.gara.categoria}}
+          {{gara.gara.nomeGara}}
         </p>
         <p>
-          {{gara.gara.vasca}} {{gara.gara.tempo}}
+          {{gara.gara.categoria}} {{gara.gara.vasca}} {{gara.codiceSesso}}
+        </p>
+        <p>
+          {{calcolaTempo(gara.gara.tempo)}}
         </p>
       </div>
     </div>

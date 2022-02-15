@@ -63,6 +63,19 @@ export class SocietariComponent implements OnInit {
   }
 
 
+
+  calcolaTempo(tempo: number){
+
+    var tempoObj: { [key: string]: number; } = {};
+
+    tempoObj['minuti'] = Math.floor(tempo / 6000);
+    tempoObj['secondi']  = Math.floor((tempo - (tempoObj['minuti'] * 6000)) / 100);
+    tempoObj['centesimi']  = tempo - (tempoObj['minuti'] * 6000) - (tempoObj['secondi'] * 100);
+
+
+    return tempoObj['minuti']+"\' "+tempoObj['secondi']+"\" "+tempoObj['centesimi']   ;
+  }
+
   checkVisibility(gara: RecordSocietario){
     let ricerca = false;
     let takeGara = true;
