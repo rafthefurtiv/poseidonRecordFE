@@ -24,6 +24,7 @@ export class SocietariComponent implements OnInit {
   message: string = "";
   gare: Array<RecordSocietario> = [];
   gareFiltrate: Array<RecordSocietario> = [];
+  caricamento: boolean = true;
 
   constructor(private recordService: RecordService) {
          //let societariCall = this.recordService.getSocietari();
@@ -44,6 +45,7 @@ export class SocietariComponent implements OnInit {
           console.log(result);
           this.categorie = result[0];
           this.stili = result[1];
+          this.cambiaGare();
         })
   }
 
@@ -65,8 +67,13 @@ export class SocietariComponent implements OnInit {
     let ricerca = false;
     let takeGara = true;
 
+    this.caricamento = false;
+
     if(this.getRicerca()){
       ricerca = true;
+    }
+    else{
+      return true;
     }
 
     if(ricerca){
