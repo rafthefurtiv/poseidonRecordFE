@@ -29,10 +29,12 @@ export class SocietariComponent implements OnInit {
   constructor(private recordService: RecordService) {
          //let societariCall = this.recordService.getSocietari();
 
+/*
          this.recordService.getSocietari().subscribe((result) => {
            console.log(result);
            this.gare = result;
          })
+         */
 
    }
 
@@ -40,11 +42,13 @@ export class SocietariComponent implements OnInit {
         let categorieCall = this.recordService.getCategorieList();
         let stiliCall = this.recordService.getStiliList();
         let metriOption = this.recordService.getMetriList();
+        let gareCall = this.recordService.getSocietari();
 
-        forkJoin(categorieCall, stiliCall).subscribe((result) => {
+        forkJoin(categorieCall, stiliCall, gareCall).subscribe((result) => {
           console.log(result);
           this.categorie = result[0];
           this.stili = result[1];
+          this.gare = result[2];
           this.cambiaGare();
         })
   }
