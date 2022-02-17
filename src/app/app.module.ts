@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddRecordComponent } from './add-record/add-record.component';
 import { FormsModule } from '@angular/forms';
 import { SocietariComponent } from './societari/societari.component';
+import { StartListComponent } from './start-list/start-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SocietariComponent } from './societari/societari.component';
     MenuComponent,
     AtletiComponent,
     AddRecordComponent,
-    SocietariComponent
+    SocietariComponent,
+    StartListComponent
   ],
   imports: [
     BrowserModule,

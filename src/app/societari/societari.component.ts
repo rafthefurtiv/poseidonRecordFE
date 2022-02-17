@@ -25,6 +25,7 @@ export class SocietariComponent implements OnInit {
   gare: Array<RecordSocietario> = [];
   gareFiltrate: Array<RecordSocietario> = [];
   caricamento: boolean = true;
+  loading: boolean = true;
 
   constructor(private recordService: RecordService) {
          //let societariCall = this.recordService.getSocietari();
@@ -39,6 +40,7 @@ export class SocietariComponent implements OnInit {
    }
 
   ngOnInit(): void {
+        this.loading = true;
         let categorieCall = this.recordService.getCategorieList();
         let stiliCall = this.recordService.getStiliList();
         let metriOption = this.recordService.getMetriList();
@@ -50,6 +52,7 @@ export class SocietariComponent implements OnInit {
           this.stili = result[1];
           this.gare = result[2];
           this.cambiaGare();
+          this.loading = false;
         })
   }
 

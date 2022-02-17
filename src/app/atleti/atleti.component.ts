@@ -26,15 +26,18 @@ export class AtletiComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   atletiList: Array<Record> = [];
   displayed: string = "none";
+  loading: boolean = true;
   constructor(private recordService: RecordService) {
     //this.atletiList = new Array<>;
    }
 
   ngOnInit(): void {
+    this.loading = true;
     this.recordService.getAllRecords()
         .subscribe((data: Array<Record>) => {
           console.log(data);
           this.atletiList = data;
+          this.loading = false;
         });
   }
 
