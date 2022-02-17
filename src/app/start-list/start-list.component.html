@@ -27,38 +27,12 @@
       <th scope="col">Scarica</th>
     </tr>
     </thead>
-    <tbody *ngFor="let atleta of atletiList; index as i">
-    <tr (click)="atleta.display = !atleta.display;"  data-toggle="collapse" data-target="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
-      <td>{{ atleta.nome }} {{atleta.cognome}}</td>
-      <td>{{ atleta.username }}</td>
-      <td>{{ atleta.codiceSesso }}</td>
+    <tbody *ngFor="let file of fileList; index as i">
+    <tr>
+      <td>{{ file.nome }} </td>
+      <td>{{ file.data }}</td>
+      <td>DOWNLOAD</td>
     </tr>
-    <tr [class]="{'mostrato': atleta.display, 'hidden': !atleta.display}" >
-      <td colspan="3">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col">Gara</th>
-            <th scope="col">Vasca</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Tempo</th>
-          </tr>
-          </thead>
-          <tbody *ngFor="let gara of atleta.gare; index as i">
-          <tr>
-            <td>{{ gara.nomeGara }}</td>
-            <td>{{ gara.vasca }}</td>
-            <td>{{ gara.categoria }}</td>
-            <td>{{ calcolaTempo(gara.tempo) }}</td>
-          </tr>
-
-          </tbody>
-        </table>
-      </td>
-
-
-    </tr>
-
     </tbody>
   </table>
 </div>
