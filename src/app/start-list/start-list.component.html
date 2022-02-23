@@ -23,15 +23,19 @@
     <thead>
     <tr>
       <th scope="col">Nome file</th>
-      <th scope="col">Data</th>
-      <th scope="col">Scarica</th>
+      <th scope="col">Data upload</th>
+      <th scope="col">DOWNLOAD</th>
     </tr>
     </thead>
     <tbody *ngFor="let file of fileList; index as i">
     <tr>
       <td>{{ file.nome }} </td>
-      <td>{{ file.data }}</td>
-      <td>DOWNLOAD</td>
+      <td>{{ file.data | date:'dd/MM/yyyy' }}</td>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="download(file.nome)">
+          <i style='font-size:24px' class='fas'>&#xf773;</i>
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>

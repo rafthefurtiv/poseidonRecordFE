@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Record } from './record';
 import { RecordSocietario } from './record-societario';
+import { StartList } from './start-list';
 import { RecordDto } from './record-dto';
 import { Stili } from './stili';
 import { Categorie } from './categorie';
@@ -69,6 +70,22 @@ export class RecordService {
 
   getSocietari() {
     return this.http.get<Array<RecordSocietario>>(this.local+"/record/record-societari");
+  }
+
+  getFileList(path: String) {
+    return this.http.get<Array<StartList>>(this.local+"/file/list?path="+path);
+  }
+
+  getFileListDefault() {
+    return this.http.get<Array<StartList>>(this.local+"/file/list");
+  }
+
+  getFileDefault(fileName: String) {
+    return this.http.get<any>(this.local+"/file/download/"+fileName);
+  }
+
+  getFile(path: String, fileName: String) {
+    return this.http.get<any>(this.local+"/file/download/"+fileName+"?path="+path);
   }
 
   getMetriList() {

@@ -1,6 +1,6 @@
 export class StartList {
 
   nome: String = "";
-  data: String = "";
+  data: number = 0;
 
 }
