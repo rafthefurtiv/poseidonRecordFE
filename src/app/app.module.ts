@@ -19,6 +19,7 @@ import { AddRecordComponent } from './add-record/add-record.component';
 import { FormsModule } from '@angular/forms';
 import { SocietariComponent } from './societari/societari.component';
 import { StartListComponent } from './start-list/start-list.component';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { StartListComponent } from './start-list/start-list.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

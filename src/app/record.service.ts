@@ -25,6 +25,8 @@ export class RecordService {
   local: string = "http://localhost:8080/poseidonRecord";
   stiliCaricati: boolean = false;
   categorieCaricate: boolean = false;
+
+  superUser: boolean = false;
   //record: string = "/record";
 
   constructor(private http: HttpClient) { }
@@ -44,7 +46,7 @@ export class RecordService {
   }
 
   getAuth(user: String, pass: String) {
-     return this.http.get<boolean>(this.local+"/utenti/login?user="+user+"&pass="+pass);
+     return this.http.get<Esito>(this.local+"/utenti/login?user="+user+"&pass="+pass);
   }
 
 /*

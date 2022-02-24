@@ -5,7 +5,7 @@
 </div>
 
 
-<mat-grid-list cols="2" rowHeight="500px">
+<mat-grid-list cols="2" rowHeight="300px">
   <mat-grid-tile colspan="1">
     <mat-card>
       <mat-card-title>Ricerca atleti</mat-card-title>
@@ -14,7 +14,7 @@
         <button [routerLink]="['/atleti']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Ricerca gare per atleta">
           Cerca
         </button>
-        <button [routerLink]="['/add-record']" *ngIf="true" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare">
+        <button *ngIf="checkSuperUser()" [routerLink]="['/add-record']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare">
           Add record
         </button>
       </mat-card-actions>
@@ -28,6 +28,21 @@
         <mat-card-actions>
           <button [routerLink]="['/societari']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Ricerca tutti i record societari">
             Tutti i record
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1">
+      <mat-card>
+        <mat-card-title>Start List</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-actions>
+          <button [routerLink]="['/start-list']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Scarica start list">
+            Download start list
+          </button>
+          <button *ngIf="false" [routerLink]="['/dump']" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Scarica start list">
+            Download start list
           </button>
         </mat-card-actions>
       </mat-card>
