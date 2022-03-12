@@ -79,8 +79,12 @@ export class SocietariComponent implements OnInit {
     tempoObj['secondi']  = Math.floor((tempo - (tempoObj['minuti'] * 6000)) / 100);
     tempoObj['centesimi']  = tempo - (tempoObj['minuti'] * 6000) - (tempoObj['secondi'] * 100);
 
+    var min = tempoObj['minuti'].toString().length < 2 ? '0'+tempoObj['minuti'] : tempoObj['minuti'];
+    var sec = tempoObj['secondi'].toString().length < 2 ? '0'+tempoObj['secondi'] : tempoObj['secondi'];
+    var cent = tempoObj['centesimi'].toString().length < 2 ? '0'+tempoObj['centesimi'] : tempoObj['centesimi'];
 
-    return tempoObj['minuti']+"\' "+tempoObj['secondi']+"\" "+tempoObj['centesimi']   ;
+
+    return min+"\' "+sec+"\" "+cent   ;
   }
 
   checkVisibility(gara: RecordSocietario){

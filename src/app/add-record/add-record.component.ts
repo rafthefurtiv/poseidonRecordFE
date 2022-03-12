@@ -31,7 +31,7 @@ export class AddRecordComponent implements OnInit {
 */
 
   record: RecordDto = {idUtente : undefined, metri: undefined, idStile: undefined, idCategoria: undefined, minuti: undefined, secondi: undefined, centesimi: undefined,
-                                  vasca: undefined};
+                                  vasca: undefined,  note:  undefined};
   constructor(private recordService: RecordService) { }
 
   ngOnInit(): void {

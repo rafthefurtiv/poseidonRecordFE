@@ -6,5 +6,6 @@ export class Gara {
   tempo: number = 0;
   metri: string = "";
   stile: string = "";
+  note: string = "";
 
 }

@@ -16,13 +16,13 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class RecordService {
-  metri: Array<number> = [50, 100, 200, 400, 500, 800, 1000];
+  metri: Array<number> = [50, 100, 200, 400, 500, 800, 1000, 1500];
   stili: Observable<Array<Stili>> = new Observable<Array<Stili>>();
   stiliData: Array<Stili> = [];
   categorie: Observable<Array<Categorie>> = new Observable<Array<Categorie>>();
   records: Array<Record> = [];
   local: string = "http://195.20.241.70:8080/poseidonRecord";
-  //local: string = "http://localhost:8080/poseidonRecord";
+  //local = "http://localhost:8080/poseidonRecord";
   stiliCaricati: boolean = false;
   categorieCaricate: boolean = false;
 

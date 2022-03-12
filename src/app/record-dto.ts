@@ -8,5 +8,6 @@ export class RecordDto {
   minuti?: number = undefined;
   secondi?: number = undefined;
   centesimi?: number = undefined;
+  note?: number = undefined;
 
 }
