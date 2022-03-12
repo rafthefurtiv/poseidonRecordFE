@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecordService } from '../record.service';
 import { Record } from '../record';
-
+import { Gara } from '../gara';
 
 export interface RecordElement {
   nome: string;
@@ -55,6 +55,20 @@ export class AtletiComponent implements OnInit {
 
 
     return min+"\' "+sec+"\" "+cent   ;
+  }
+
+  isRecordMigliore(gara: Gara, gare: Array<Gara>){
+
+    var isRecordMigliore = true;
+
+    var gareSimili = gare.filter( r => {return r.nomeGara == gara.nomeGara && r.vasca == gara.vasca });
+
+    gareSimili.forEach(g => {
+      if(gara.tempo > g.tempo){
+        isRecordMigliore = false;
+      }
+    });
+    return isRecordMigliore;
   }
 
 

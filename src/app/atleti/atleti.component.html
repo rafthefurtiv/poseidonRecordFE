@@ -60,7 +60,7 @@
           </tr>
           </thead>
           <tbody *ngFor="let gara of atleta.gare; index as i">
-          <tr>
+          <tr *ngIf="isRecordMigliore(gara, atleta.gare)">
             <td>{{ gara.nomeGara }}</td>
             <td>{{ gara.vasca }}</td>
             <td>{{ gara.categoria }}</td>
