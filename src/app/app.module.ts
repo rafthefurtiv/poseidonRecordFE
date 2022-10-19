@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { SocietariComponent } from './societari/societari.component';
 import { StartListComponent } from './start-list/start-list.component';
 import {CookieService} from 'ngx-cookie-service';
+import { MacchineComponent } from './macchine/macchine.component';
+import { MacchinaComponent } from './macchina/macchina.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {CookieService} from 'ngx-cookie-service';
     AtletiComponent,
     AddRecordComponent,
     SocietariComponent,
-    StartListComponent
+    StartListComponent,
+    MacchineComponent,
+    MacchinaComponent
   ],
   imports: [
     BrowserModule,
