@@ -22,6 +22,7 @@ import { StartListComponent } from './start-list/start-list.component';
 import {CookieService} from 'ngx-cookie-service';
 import { MacchineComponent } from './macchine/macchine.component';
 import { MacchinaComponent } from './macchina/macchina.component';
+import { VeicoloPasseggeriComponent } from './veicolo-passeggeri/veicolo-passeggeri.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MacchinaComponent } from './macchina/macchina.component';
     SocietariComponent,
     StartListComponent,
     MacchineComponent,
-    MacchinaComponent
+    MacchinaComponent,
+    VeicoloPasseggeriComponent
   ],
   imports: [
     BrowserModule,
