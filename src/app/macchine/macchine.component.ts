@@ -9,7 +9,7 @@ export class MacchineComponent implements OnInit {
 
   andata: Boolean = true;
   ritorno: Boolean = true;
-  loading: Boolean = true;
+  loading: Boolean = false;
   vett : number[] = [1, 2, 3];
 
 
