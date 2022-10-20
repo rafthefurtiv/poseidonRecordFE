@@ -1,2 +1,72 @@
 <p>Macchine works!</p>
+
+
+<mat-grid-list cols="1" rowHeight="300px">
+  <mat-grid-tile colspan="1">
+    <mat-card>
+      <mat-card-title>VEICOLO PERSONALE</mat-card-title>
+      <mat-card-subtitle>Configura la tua macchina</mat-card-subtitle>
+
+      <mat-card-content>
+
+        <div class="row">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <label for="nomeVeicolo">Nome veicolo: </label>
+            <input id="nomeVeicolo">
+          </div>
+
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+          </div>
+
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <label for="posti">Posti: </label>
+            <input id="posti" type="number" max="10">
+          </div>
+
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          </div>
+
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <p>Tipo: </p>
+            <input id="tipo_auto" type="radio" name="tipologia" value="AUTO">
+            <label for="tipo_auto" style="margin-left:7px;">AUTO</label><br>
+            <input id="tipo_moto" type="radio" name="tipologia" value="MOTO">
+            <label for="tipo_moto" style="margin-left:7px;">MOTO</label><br>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <p>Tragitto: </p>
+            <input id="andata" type="checkbox" name="andata" [value]="andata">
+            <label for="andata" style="margin-left:7px;">Andata</label>
+            <input id="postiAndata" type="number" max="10" *ngIf="!andata">
+            <br>
+            <input id="ritorno" type="checkbox" name="ritorno" value="Ritorno">
+            <label for="ritorno" style="margin-left:7px;">Ritorno</label><br>
+          </div>
+
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+          </div>
+
+          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            <label for="posti">Note: </label>
+            <textarea id="note" style="width: 100%; resize: none;" rows="3"></textarea>
+          </div>
+
+        </div>
+
+
+      </mat-card-content>
+
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+
 <app-macchina></app-macchina>

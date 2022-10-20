@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MacchineComponent implements OnInit {
 
-  constructor() { }
+  andata: Boolean = true;
+
+  constructor() {
+    //andata: Boolean;
+  }
+
+
 
   ngOnInit(): void {
   }
