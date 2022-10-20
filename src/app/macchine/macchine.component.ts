@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class MacchineComponent implements OnInit {
 
   andata: Boolean = true;
+  vett : number[] = [1, 2, 3];
+
+
 
   constructor() {
     //andata: Boolean;
