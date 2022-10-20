@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class MacchineComponent implements OnInit {
 
   andata: Boolean = true;
+  ritorno: Boolean = true;
+  loading: Boolean = true;
   vett : number[] = [1, 2, 3];
 
 
