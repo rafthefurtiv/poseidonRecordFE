@@ -24,6 +24,7 @@ import { MacchineComponent } from './macchine/macchine.component';
 import { MacchinaComponent } from './macchina/macchina.component';
 import { VeicoloPasseggeriComponent } from './veicolo-passeggeri/veicolo-passeggeri.component';
 import { HeaderComponent } from './header/header.component';
+import { PizzaComponent } from './pizza/pizza.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HeaderComponent } from './header/header.component';
     MacchineComponent,
     MacchinaComponent,
     VeicoloPasseggeriComponent,
-    HeaderComponent
+    HeaderComponent,
+    PizzaComponent
   ],
   imports: [
     BrowserModule,
