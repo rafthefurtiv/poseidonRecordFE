@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Macchina } from '../macchina';
 
 @Component({
   selector: 'app-macchine',
@@ -12,6 +13,8 @@ export class MacchineComponent implements OnInit {
   loading: Boolean = false;
   vett : number[] = [1, 2, 3];
 
+  macchine: Macchina[] = [];
+
 
 
   constructor() {
@@ -21,6 +24,22 @@ export class MacchineComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    var macchina = {nome: "Macchina test", proprietario:"Test", auto: true, andata: true,
+    ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
+
+    this.macchine.push(macchina);
+
+    var macchina = {nome: "Macchina test2", proprietario:"Test", auto: true, andata: true,
+    ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
+
+    this.macchine.push(macchina);
+
+    var macchina = {nome: "Macchina test3", proprietario:"Test", auto: true, andata: true,
+    ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
+
+    this.macchine.push(macchina);
+
   }
 
 }

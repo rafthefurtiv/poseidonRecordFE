@@ -1,42 +1,56 @@
 <mat-card style="margin: 20px;">
 
-  <mat-card-title>NOME MACCHINA</mat-card-title>
+  <mat-card-title>{{macchina.nome}}</mat-card-title>
   <mat-card-subtitle>Veicolo di DINO</mat-card-subtitle>
 
-  <mat-card style="margin: 10px;">
-    <mat-card-title>ANDATA</mat-card-title>
-    <mat-card-subtitle>Posti 4/5</mat-card-subtitle>
-    <mat-card-content>
-      <p>Raffaele Barbato</p>
-      <p>Gaetano Cerullo</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
-        Entra
-      </button>
-      <button type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
-        Esci
-      </button>
-    </mat-card-actions>
-  </mat-card>
 
-  <mat-card style="margin: 10px;">
-    <mat-card-title>RITORNO</mat-card-title>
-    <mat-card-subtitle>Posti 4/5</mat-card-subtitle>
-    <mat-card-content>
-      <p>Raffaele Barbato 2</p>
-      <p>Gaetano Cerullo 3</p>
-      <p style="background-color: green; color: white;">Posto vuoto</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
-        Entra
-      </button>
-      <button type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
-        Esci
-      </button>
-    </mat-card-actions>
-  </mat-card>
+  <div class="row">
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <mat-card style="margin: 10px;">
+        <mat-card-title>ANDATA</mat-card-title>
+        <mat-card-subtitle>Posti 4/5</mat-card-subtitle>
+        <mat-card-content>
+          <p>Raffaele Barbato</p>
+          <p>Gaetano Cerullo</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
+            Entra
+          </button>
+          <button type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+            Esci
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <mat-card style="margin: 10px;">
+        <mat-card-title>RITORNO</mat-card-title>
+        <mat-card-subtitle>Posti 4/5</mat-card-subtitle>
+        <mat-card-content>
+          <p>Raffaele Barbato 2</p>
+          <p>Gaetano Cerullo 3</p>
+          <p style="background-color: green; color: white;">Posto vuoto</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
+            Entra
+          </button>
+          <button type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+            Esci
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+
+
+
+
+  </div>
+
 
   <p>Note dell'autista</p>
 

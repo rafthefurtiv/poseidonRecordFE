@@ -87,7 +87,7 @@
 
   <mat-grid-list cols="2" rowHeight="600px">
     <mat-grid-tile colspan="2">
-      <app-macchina *ngFor="let v of vett"></app-macchina>
+      <app-macchina *ngFor="let m of macchine" [macchina]="m"></app-macchina>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
