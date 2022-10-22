@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Macchina } from '../macchina';
+import { Prenotazioni } from '../prenotazioni';
 
 @Component({
   selector: 'app-macchine',
@@ -11,9 +12,8 @@ export class MacchineComponent implements OnInit {
   andata: Boolean = true;
   ritorno: Boolean = true;
   loading: Boolean = false;
-  vett : number[] = [1, 2, 3];
-
   macchine: Macchina[] = [];
+  prenotazione: Prenotazioni = {andataP: false, ritornoP: false};
 
 
 
@@ -24,14 +24,13 @@ export class MacchineComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     var macchina = {nome: "Macchina test", proprietario:"Test", auto: true, andata: true,
     ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
 
     this.macchine.push(macchina);
 
     var macchina = {nome: "Macchina test2", proprietario:"Test", auto: true, andata: true,
-    ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
+    ritorno: true, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
 
     this.macchine.push(macchina);
 
@@ -39,7 +38,6 @@ export class MacchineComponent implements OnInit {
     ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
 
     this.macchine.push(macchina);
-
   }
 
 }

@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
 
       this.recordService.superUser = data.superUser;
       this.cookieService.set("superUser", data.superUser ? 'S' : 'N');
+      this.cookieService.set("username", String(this.username));
       this.router.navigate(['menu']);
       this.loading = false;
 

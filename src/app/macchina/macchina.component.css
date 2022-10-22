@@ -1,3 +1,8 @@
 mat-card{
   border: 1px solid gray;
 }
+
+
+button:disabled {
+   background-color: #b3b3b3;
+}

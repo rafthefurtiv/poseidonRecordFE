@@ -1,44 +1,44 @@
 <mat-card style="margin: 20px;">
 
   <mat-card-title>{{macchina.nome}}</mat-card-title>
-  <mat-card-subtitle>Veicolo di DINO</mat-card-subtitle>
+  <mat-card-subtitle>Veicolo di {{macchina.proprietario}}</mat-card-subtitle>
 
 
   <div class="row">
-
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="col-xs col-sm col-md col-lg" *ngIf="macchina.andata">
       <mat-card style="margin: 10px;">
         <mat-card-title>ANDATA</mat-card-title>
-        <mat-card-subtitle>Posti 4/5</mat-card-subtitle>
+        <mat-card-subtitle>Posti {{macchina.passeggeriAndata.length}}/{{macchina.postiAndata}}</mat-card-subtitle>
         <mat-card-content>
-          <p>Raffaele Barbato</p>
-          <p>Gaetano Cerullo</p>
+          <p *ngFor="let p of macchina.passeggeriAndata">{{p}}</p>
+          <p style="background-color:#0091ef;" *ngFor="let f of [].constructor(macchina.postiAndata - macchina.passeggeriAndata.length)">POSTO LIBERO</p>
         </mat-card-content>
         <mat-card-actions>
-          <button type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
+          <button [disabled]="macchina.passeggeriAndata.includes(utente) || (prenotazione.andataP && !macchina.passeggeriAndata.includes(utente))" (click)="entra(1)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Entra in macchina">
             Entra
           </button>
-          <button type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+          <button [disabled]="!macchina.passeggeriAndata.includes(utente)" (click)="esci(1)"  type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
             Esci
           </button>
         </mat-card-actions>
       </mat-card>
     </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="col-xs col-sm col-md col-lg" *ngIf="macchina.ritorno">
       <mat-card style="margin: 10px;">
         <mat-card-title>RITORNO</mat-card-title>
-        <mat-card-subtitle>Posti 4/5</mat-card-subtitle>
+        <mat-card-subtitle>Posti {{macchina.passeggeriRitorno.length}}/{{macchina.postiRitorno}}</mat-card-subtitle>
         <mat-card-content>
-          <p>Raffaele Barbato 2</p>
-          <p>Gaetano Cerullo 3</p>
-          <p style="background-color: green; color: white;">Posto vuoto</p>
+          <mat-card-content>
+            <p *ngFor="let p of macchina.passeggeriRitorno">{{p}}</p>
+            <p style="background-color:#0091ef;" *ngFor="let f of [].constructor(macchina.postiRitorno - macchina.passeggeriRitorno.length)">POSTO LIBERO</p>
+          </mat-card-content>
         </mat-card-content>
         <mat-card-actions>
-          <button type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
+          <button [disabled]="macchina.passeggeriRitorno.includes(utente) || (prenotazione.ritornoP && !macchina.passeggeriRitorno.includes(utente))" (click)="entra(2)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
             Entra
           </button>
-          <button type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+          <button [disabled]="!macchina.passeggeriRitorno.includes(utente)" (click)="esci(2)" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
             Esci
           </button>
         </mat-card-actions>
