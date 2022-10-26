@@ -1,0 +1,35 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+import { Macchina } from './macchina';
+import { Esito } from './esito';
+import { of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RecordService {
+  //categorie: Observable<Array<Categorie>> = new Observable<Array<Categorie>>();
+  //local: string = "http://195.20.241.70:8080/poseidonRecord";
+  local: string = "http://localhost:8080/poseidonRecord";
+
+  constructor(private http: HttpClient) { }
+
+  getAllMacchine() {
+    return this.http.get<Array<Macchina>>(this.local+"/macchine");
+  }
+
+  saveMacchina(macchina:  Macchina) {
+    return this.http.post<Array<Macchina>>(this.local+"/macchine/macchina", macchina, {});
+  }
+
+  savePasseggero(pass: Integer, macch: Integer, andata: Boolean, ritorno: Boolean) {
+    return this.http.post<Esito>(this.local+"/macchine/passeggero/"+pass+"/macchina/"+macch+"?andata="+andata+"&ritorno="+ritorno, record, {});
+  }
+
+  deleteMacchina(prop: Integer) {
+    return this.http.delete<Esito>(this.local+"/macchine/macchina/utente/"+prop, {}, {});
+  }
+
+}

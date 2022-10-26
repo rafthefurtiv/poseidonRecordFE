@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Macchina } from '../macchina';
 import { Prenotazioni } from '../prenotazioni';
+import { MacchineService } from '../macchine.service';
 
 @Component({
   selector: 'app-macchine',
@@ -17,7 +18,7 @@ export class MacchineComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private macchineService: MacchineService) {
     //andata: Boolean;
   }
 
@@ -38,6 +39,16 @@ export class MacchineComponent implements OnInit {
     ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
 
     this.macchine.push(macchina);
+  }
+
+
+
+  public salvaMacchina(){
+    this.macchineService.saveMacchina();
+  }
+
+  public eliminaMacchina(){
+
   }
 
 }
