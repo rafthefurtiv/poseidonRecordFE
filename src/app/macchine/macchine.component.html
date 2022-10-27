@@ -17,7 +17,7 @@
           <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
               <label for="nomeVeicolo">Nome veicolo: </label>
-              <input id="nomeVeicolo">
+              <input id="nomeVeicolo" [(ngModel)]="macchinaPersonale.nome">
             </div>
 
             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
@@ -29,9 +29,9 @@
 
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
               <p>Tipo: </p>
-              <input id="tipo_auto" type="radio" name="tipologia" value="AUTO" checked>
+              <input id="tipo_auto" type="radio" name="tipologia" value="AUTO" checked [(ngModel)]="tipo">
               <label for="tipo_auto" style="margin-left: 7px; margin-right: 20px;">AUTO</label>
-              <input id="tipo_moto" type="radio" name="tipologia" value="MOTO">
+              <input id="tipo_moto" type="radio" name="tipologia" value="MOTO" [(ngModel)]="tipo">
               <label for="tipo_moto" style="margin-left:7px;">MOTO</label><br>
             </div>
 
@@ -40,10 +40,10 @@
           <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
               <p>Tragitto: </p>
-              <input id="andata" type="checkbox" name="andata" [(ngModel)]="andata">
+              <input id="andata" type="checkbox" name="andata" [(ngModel)]="macchinaPersonale.andata">
               <label for="andata" style="margin-left:7px;">Andata</label>
               <br>
-              <input id="ritorno" type="checkbox" name="ritorno" value="Ritorno" [(ngModel)]="ritorno">
+              <input id="ritorno" type="checkbox" name="ritorno" value="Ritorno" [(ngModel)]="macchinaPersonale.ritorno">
               <label for="ritorno" style="margin-left:7px;">Ritorno</label><br>
             </div>
 
@@ -53,8 +53,8 @@
 
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
               <label>Posti: </label>
-              <input id="postiAndata" type="number" max="10" [disabled]="!andata">
-              <input id="postiRitorno" type="number" max="10" [disabled]="!ritorno">
+              <input id="postiAndata" type="number" max="10" [disabled]="!andata" [(ngModel)]="macchinaPersonale.postiAndata">
+              <input id="postiRitorno" type="number" max="10" [disabled]="!ritorno" [(ngModel)]="macchinaPersonale.postiRitorno">
             </div>
 
 
@@ -63,7 +63,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <label for="note">Note: </label>
-              <textarea id="note" style="width: 100%; resize: none;" rows="3"></textarea>
+              <textarea id="note" style="width: 100%; resize: none;" rows="3" [(ngModel)]="macchinaPersonale.note"></textarea>
             </div>
           </div>
 
@@ -73,7 +73,7 @@
           <button (click)="salvaMacchina()" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
             Salva
           </button>
-          <button type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+          <button (click)="test()" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
             Elimina
           </button>
         </mat-card-actions>

@@ -14,6 +14,12 @@ export class MacchineComponent implements OnInit {
   ritorno: Boolean = true;
   loading: Boolean = false;
   macchine: Macchina[] = [];
+  tipo: string = "AUTO";
+  macchinaPersonale: Macchina = {nome: "Macchina test3", proprietario:"Test", auto: true, andata: true,
+                                    ritorno: true, postiAndata: 4, postiRitorno: 5,
+                                    passeggeriAndata: ["Raf Barb", "Test test"],
+                                    passeggeriRitorno: ["Raf Barb", "Test test"],
+                                    note: "test note"};
   prenotazione: Prenotazioni = {andataP: false, ritornoP: false};
 
 
@@ -26,17 +32,17 @@ export class MacchineComponent implements OnInit {
 
   ngOnInit(): void {
     var macchina = {nome: "Macchina test", proprietario:"Test", auto: true, andata: true,
-    ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
+    ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"], note: "test"};
 
     this.macchine.push(macchina);
 
-    var macchina = {nome: "Macchina test2", proprietario:"Test", auto: true, andata: true,
-    ritorno: true, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
+    macchina = {nome: "Macchina test2", proprietario:"Test", auto: true, andata: true,
+    ritorno: true, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"], note: ""};
 
     this.macchine.push(macchina);
 
-    var macchina = {nome: "Macchina test3", proprietario:"Test", auto: true, andata: true,
-    ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
+    macchina = {nome: "Macchina test3", proprietario:"Test", auto: true, andata: true,
+    ritorno: false, postiAndata: 4, postiRitorno: 5, passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"], note: "test"};
 
     this.macchine.push(macchina);
   }
@@ -44,11 +50,19 @@ export class MacchineComponent implements OnInit {
 
 
   public salvaMacchina(){
-    this.macchineService.saveMacchina();
+    console.log("salvataggio");
+    this.macchineService.saveMacchina(this.macchinaPersonale).subscribe(
+    res => {console.log(res);},
+    err => {console.log(err);}
+    );
   }
 
   public eliminaMacchina(){
 
+  }
+
+  public test(){
+    console.log(this.macchinaPersonale);
   }
 
 }
