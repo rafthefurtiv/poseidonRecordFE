@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Macchina } from './macchina';
+import { MacchinaUtente } from './macchina-utente';
 import { Esito } from './esito';
 import { of } from 'rxjs';
 
@@ -18,6 +19,9 @@ export class MacchineService {
 
   getAllMacchine() {
     return this.http.get<Array<Macchina>>(this.local+"/macchine");
+  }
+  getAllMacchineUtenti() {
+    return this.http.get<Array<MacchinaUtente>>(this.local+"/macchine/utenti");
   }
 
   saveMacchina(macchina:  Macchina) {

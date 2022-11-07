@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Macchina } from '../macchina';
+import { MacchinaUtente } from '../macchina-utente';
 import { Prenotazioni } from '../prenotazioni';
 import {CookieService} from 'ngx-cookie-service';
 
@@ -12,11 +13,11 @@ import {CookieService} from 'ngx-cookie-service';
 
 export class MacchinaComponent implements OnInit {
 
-  @Input() macchina:  Macchina = {nome: "Macchina test", proprietario:"Test", auto: true, andata: true,
-                                     ritorno: false, postiAndata: 4, postiRitorno: 5,
-                                     passeggeriAndata: ["Raf Barb", "Test test"], passeggeriRitorno: ["Raf Barb", "Test test"]};
+  @Input() macchina:  MacchinaUtente = {macchina: {nome: "Macchina test", proprietario:"Test", idProprietario: 1, auto: true, andata: true,
+                                                      ritorno: false, postiAndata: 4, postiRitorno: 5, note: "test"},
+                                     macchineUtentiListAndata: ["Raf Barb", "Test test"], macchineUtentiListRitorno: ["Raf Barb", "Test test"]};
 
-  @Input() macchine: Macchina[] = [];
+  @Input() macchine: MacchinaUtente[] = [];
 
   @Input() andataPrenotata: boolean = false;
   @Input() ritornoPrenotato: boolean = false;
@@ -37,12 +38,12 @@ export class MacchinaComponent implements OnInit {
     this.andataPrenotata = false;
     this.ritornoPrenotato = false;
     this.macchine.forEach(m => {
-      if(m.passeggeriAndata.includes(this.utente)){
+      if(m.macchineUtentiListAndata.includes(this.utente)){
         this.andataPrenotata = true;
       }
     });
     this.macchine.forEach(m => {
-      if(m.passeggeriRitorno.includes(this.utente)){
+      if(m.macchineUtentiListRitorno.includes(this.utente)){
         this.ritornoPrenotato = true;
       }
     });
@@ -50,16 +51,16 @@ export class MacchinaComponent implements OnInit {
 
   public entra(tragitto: number){
     if(tragitto == 1){
-      if(!this.macchina.passeggeriAndata.includes(this.utente)
-      && this.macchina.passeggeriAndata.length < this.macchina.postiAndata){
-        this.macchina.passeggeriAndata.push(this.utente);
+      if(!this.macchina.macchineUtentiListAndata.includes(this.utente)
+      && this.macchina.macchineUtentiListAndata.length < this.macchina.macchina.postiAndata){
+        this.macchina.macchineUtentiListAndata.push(this.utente);
         this.prenotazione.andataP = true;
       }
     }
     else if(tragitto == 2){
-      if(!this.macchina.passeggeriRitorno.includes(this.utente)
-      && this.macchina.passeggeriRitorno.length < this.macchina.postiRitorno){
-        this.macchina.passeggeriRitorno.push(this.utente);
+      if(!this.macchina.macchineUtentiListRitorno.includes(this.utente)
+      && this.macchina.macchineUtentiListRitorno.length < this.macchina.macchina.postiRitorno){
+        this.macchina.macchineUtentiListRitorno.push(this.utente);
         this.prenotazione.ritornoP = true;
       }
     }
@@ -67,14 +68,14 @@ export class MacchinaComponent implements OnInit {
 
   public esci(tragitto: number){
     if(tragitto == 1){
-      if(this.macchina.passeggeriAndata.includes(this.utente)){
-        this.macchina.passeggeriAndata.splice(this.macchina.passeggeriAndata.indexOf(this.utente,1));
+      if(this.macchina.macchineUtentiListAndata.includes(this.utente)){
+        this.macchina.macchineUtentiListAndata.splice(this.macchina.macchineUtentiListAndata.indexOf(this.utente,1));
         this.prenotazione.andataP = false;
       }
     }
     else if(tragitto == 2){
-      if(this.macchina.passeggeriRitorno.includes(this.utente)){
-        this.macchina.passeggeriRitorno.splice(this.macchina.passeggeriRitorno.indexOf(this.utente,1));
+      if(this.macchina.macchineUtentiListRitorno.includes(this.utente)){
+        this.macchina.macchineUtentiListRitorno.splice(this.macchina.macchineUtentiListRitorno.indexOf(this.utente,1));
         this.prenotazione.ritornoP = false;
       }
     }
