@@ -13,7 +13,7 @@ import {CookieService} from 'ngx-cookie-service';
 
 export class MacchinaComponent implements OnInit {
 
-  @Input() macchina:  MacchinaUtente = {macchina: {nome: "Macchina test", proprietario:"Test", idProprietario: 1, auto: true, andata: true,
+  @Input() macchina:  MacchinaUtente = {macchina: {nome: "Macchina test", proprietario:"Test", idProprietario: 1, username: "v", auto: true, andata: true,
                                                       ritorno: false, postiAndata: 4, postiRitorno: 5, note: "test"},
                                      macchineUtentiListAndata: ["Raf Barb", "Test test"], macchineUtentiListRitorno: ["Raf Barb", "Test test"]};
 
