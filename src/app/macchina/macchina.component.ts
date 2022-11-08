@@ -3,6 +3,7 @@ import { Macchina } from '../macchina';
 import { MacchinaUtente } from '../macchina-utente';
 import { Prenotazioni } from '../prenotazioni';
 import {CookieService} from 'ngx-cookie-service';
+import { MacchineService } from '../macchine.service';
 
 @Component({
   selector: 'app-macchina',
@@ -13,7 +14,7 @@ import {CookieService} from 'ngx-cookie-service';
 
 export class MacchinaComponent implements OnInit {
 
-  @Input() macchina:  MacchinaUtente = {macchina: {nome: "Macchina test", proprietario:"Test", idProprietario: 1, username: "v", auto: true, andata: true,
+  @Input() macchina:  MacchinaUtente = {macchina: {nome: "Macchina test", proprietario:"Test", idProprietario: 1, username: "v", id: 0, auto: true, andata: true,
                                                       ritorno: false, postiAndata: 4, postiRitorno: 5, note: "test"},
                                      macchineUtentiListAndata: ["Raf Barb", "Test test"], macchineUtentiListRitorno: ["Raf Barb", "Test test"]};
 
@@ -28,7 +29,7 @@ export class MacchinaComponent implements OnInit {
 
   utente: String = "";
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private macchineService: MacchineService) { }
 
   ngOnInit(): void {
     this.utente = this.cookieService.get("username");
@@ -54,6 +55,12 @@ export class MacchinaComponent implements OnInit {
       if(!this.macchina.macchineUtentiListAndata.includes(this.utente)
       && this.macchina.macchineUtentiListAndata.length < this.macchina.macchina.postiAndata){
         this.macchina.macchineUtentiListAndata.push(this.utente);
+
+        this.macchineService.savePasseggero(this.utente.toString(), this.macchina.macchina.id, true, this.prenotazione.andataP).subscribe(
+          res => {console.log(res);},
+          err => {console.log(err);}
+        );
+
         this.prenotazione.andataP = true;
       }
     }

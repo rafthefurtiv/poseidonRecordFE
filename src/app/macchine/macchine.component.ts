@@ -19,7 +19,7 @@ export class MacchineComponent implements OnInit {
   macchinaEsistente: Boolean = false;
   macchine: MacchinaUtente[] = [];
   tipo: string = "AUTO";
-  macchinaPersonale: Macchina = {nome: "Macchina test3", proprietario:"Test", idProprietario: 1, username: "v", auto: true, andata: true,
+  macchinaPersonale: Macchina = {nome: "Macchina test3", id: 0, proprietario:"Test", idProprietario: 1, username: "v", auto: true, andata: true,
                                     ritorno: true, postiAndata: 4, postiRitorno: 5,
                                     note: "test note"};
   prenotazione: Prenotazioni = {andataP: false, ritornoP: false};
@@ -33,7 +33,7 @@ export class MacchineComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.loading = true;
     // TODO getMacchine();
     //var callAllCar = this.macchineService.getAllMacchine();
     var callAllCarUte = this.macchineService.getAllMacchineUtenti();
@@ -45,7 +45,7 @@ export class MacchineComponent implements OnInit {
       this.macchine = res[0];
 
       this.getMacchinaPersonale(this.macchine);
-
+      this.loading = false;
       }
     );
 
@@ -84,18 +84,19 @@ export class MacchineComponent implements OnInit {
 
 
   public salvaMacchina(){
+    this.loading = true;
     console.log("salvataggio");
     console.log(this.macchinaPersonale);
     if(this.macchinaEsistente){
         this.macchineService.updateMacchina(this.macchinaPersonale).subscribe(
-          res => {console.log(res);},
-          err => {console.log(err);}
+          res => {console.log(res); this.loading = false;},
+          err => {console.log(err); this.loading = false;}
         );
     }
     else{
         this.macchineService.saveMacchina(this.macchinaPersonale).subscribe(
-          res => {console.log(res);},
-          err => {console.log(err);}
+          res => {console.log(res); this.loading = false;},
+          err => {console.log(err); this.loading = false;}
         );
     }
   }

@@ -3,6 +3,7 @@ export class Macchina {
     nome: string = "";
     proprietario: string = "";
     idProprietario: number = 0;
+    id: number = 0;
     username: string = "";
     auto: boolean = false;
     andata: boolean = false;

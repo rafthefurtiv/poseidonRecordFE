@@ -32,7 +32,7 @@ export class MacchineService {
     return this.http.put<Array<Macchina>>(this.local+"/macchine/macchina", macchina, {});
   }
 
-  savePasseggero(pass: number, macch: number, andata: Boolean, ritorno: Boolean) {
+  savePasseggero(pass: string, macch: number, andata: Boolean, ritorno: Boolean) {
     return this.http.post<Esito>(this.local+"/macchine/passeggero/"+pass+"/macchina/"+macch+"?andata="+andata+"&ritorno="+ritorno, null, {});
   }
 
