@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Macchina } from '../macchina';
+import { Utente } from '../utente';
 import { MacchinaUtente } from '../macchina-utente';
 import { Prenotazioni } from '../prenotazioni';
 import {CookieService} from 'ngx-cookie-service';
@@ -22,6 +23,7 @@ export class MacchinaComponent implements OnInit {
 
   @Input() andataPrenotata: boolean = false;
   @Input() ritornoPrenotato: boolean = false;
+  @Input() utenteAttivo: Utente = {nome:"", cognome: "", username:""};
 
   @Input() prenotazione: Prenotazioni = {andataP: false, ritornoP: false};
 
@@ -32,31 +34,33 @@ export class MacchinaComponent implements OnInit {
   constructor(private cookieService: CookieService, private macchineService: MacchineService) { }
 
   ngOnInit(): void {
-    this.utente = this.cookieService.get("username");
+    this.calcolaPrenotazione();
   }
 
   public calcolaPrenotazione(){
     this.andataPrenotata = false;
     this.ritornoPrenotato = false;
     this.macchine.forEach(m => {
-      if(m.macchineUtentiListAndata.includes(this.utente)){
+      if(m.macchineUtentiListAndata.includes(this.getFullName())){
         this.andataPrenotata = true;
+        this.prenotazione.andataP = true;
       }
     });
     this.macchine.forEach(m => {
-      if(m.macchineUtentiListRitorno.includes(this.utente)){
+      if(m.macchineUtentiListRitorno.includes(this.getFullName())){
         this.ritornoPrenotato = true;
+        this.prenotazione.ritornoP = true;
       }
     });
   }
 
   public entra(tragitto: number){
     if(tragitto == 1){
-      if(!this.macchina.macchineUtentiListAndata.includes(this.utente)
+      if(!this.macchina.macchineUtentiListAndata.includes(this.getFullName())
       && this.macchina.macchineUtentiListAndata.length < this.macchina.macchina.postiAndata){
-        this.macchina.macchineUtentiListAndata.push(this.utente);
+        this.macchina.macchineUtentiListAndata.push(this.getFullName());
 
-        this.macchineService.savePasseggero(this.utente.toString(), this.macchina.macchina.id, true, this.prenotazione.andataP).subscribe(
+        this.macchineService.savePasseggero(this.getFullName().toString(), this.macchina.macchina.id, true, this.prenotazione.andataP).subscribe(
           res => {console.log(res);},
           err => {console.log(err);}
         );
@@ -65,9 +69,9 @@ export class MacchinaComponent implements OnInit {
       }
     }
     else if(tragitto == 2){
-      if(!this.macchina.macchineUtentiListRitorno.includes(this.utente)
+      if(!this.macchina.macchineUtentiListRitorno.includes(this.getFullName())
       && this.macchina.macchineUtentiListRitorno.length < this.macchina.macchina.postiRitorno){
-        this.macchina.macchineUtentiListRitorno.push(this.utente);
+        this.macchina.macchineUtentiListRitorno.push(this.getFullName());
         this.prenotazione.ritornoP = true;
       }
     }
@@ -75,18 +79,22 @@ export class MacchinaComponent implements OnInit {
 
   public esci(tragitto: number){
     if(tragitto == 1){
-      if(this.macchina.macchineUtentiListAndata.includes(this.utente)){
-        this.macchina.macchineUtentiListAndata.splice(this.macchina.macchineUtentiListAndata.indexOf(this.utente,1));
+      if(this.macchina.macchineUtentiListAndata.includes(this.getFullName())){
+        this.macchina.macchineUtentiListAndata.splice(this.macchina.macchineUtentiListAndata.indexOf(this.getFullName(),1));
         this.prenotazione.andataP = false;
       }
     }
     else if(tragitto == 2){
-      if(this.macchina.macchineUtentiListRitorno.includes(this.utente)){
-        this.macchina.macchineUtentiListRitorno.splice(this.macchina.macchineUtentiListRitorno.indexOf(this.utente,1));
+      if(this.macchina.macchineUtentiListRitorno.includes(this.getFullName())){
+        this.macchina.macchineUtentiListRitorno.splice(this.macchina.macchineUtentiListRitorno.indexOf(this.getFullName(),1));
         this.prenotazione.ritornoP = false;
       }
     }
   }
 
+
+  public getFullName(){
+    return this.cookieService.get("fullname");
+  }
 
 }

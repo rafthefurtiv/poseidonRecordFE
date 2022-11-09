@@ -11,13 +11,13 @@
         <mat-card-subtitle>Posti {{macchina.macchineUtentiListAndata.length}}/{{macchina.macchina.postiAndata}}</mat-card-subtitle>
         <mat-card-content>
           <p *ngFor="let p of macchina.macchineUtentiListAndata">{{p}}</p>
-          <p style="background-color:#0091ef;" *ngFor="let f of [].constructor(macchina.macchina.postiAndata - macchina.macchineUtentiListAndata.length)">POSTO LIBERO</p>
+          <p class="posto-libero" *ngFor="let f of [].constructor(macchina.macchina.postiAndata - macchina.macchineUtentiListAndata.length)">POSTO LIBERO</p>
         </mat-card-content>
         <mat-card-actions>
-          <button [disabled]="macchina.macchineUtentiListAndata.includes(utente) || (prenotazione.andataP && !macchina.macchineUtentiListAndata.includes(utente))" (click)="entra(1)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Entra in macchina">
+          <button [disabled]="macchina.macchineUtentiListAndata.includes(this.getFullName()) || (prenotazione.andataP && !macchina.macchineUtentiListAndata.includes(this.getFullName()))" (click)="entra(1)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Entra in macchina">
             Entra
           </button>
-          <button [disabled]="!macchina.macchineUtentiListAndata.includes(utente)" (click)="esci(1)"  type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+          <button [disabled]="!macchina.macchineUtentiListAndata.includes(this.getFullName())" (click)="esci(1)"  type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
             Esci
           </button>
         </mat-card-actions>
@@ -31,14 +31,14 @@
         <mat-card-content>
           <mat-card-content>
             <p *ngFor="let p of macchina.macchineUtentiListRitorno">{{p}}</p>
-            <p style="background-color:#0091ef;" *ngFor="let f of [].constructor(macchina.macchina.postiRitorno - macchina.macchineUtentiListRitorno.length)">POSTO LIBERO</p>
+            <p class="posto-libero" *ngFor="let f of [].constructor(macchina.macchina.postiRitorno - macchina.macchineUtentiListRitorno.length)">POSTO LIBERO</p>
           </mat-card-content>
         </mat-card-content>
         <mat-card-actions>
-          <button [disabled]="macchina.macchineUtentiListRitorno.includes(utente) || (prenotazione.ritornoP && !macchina.macchineUtentiListRitorno.includes(utente))" (click)="entra(2)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
+          <button [disabled]="macchina.macchineUtentiListRitorno.includes(this.getFullName()) || (prenotazione.ritornoP && !macchina.macchineUtentiListRitorno.includes(this.getFullName()))" (click)="entra(2)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
             Entra
           </button>
-          <button [disabled]="!macchina.macchineUtentiListRitorno.includes(utente)" (click)="esci(2)" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+          <button [disabled]="!macchina.macchineUtentiListRitorno.includes(this.getFullName())" (click)="esci(2)" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
             Esci
           </button>
         </mat-card-actions>

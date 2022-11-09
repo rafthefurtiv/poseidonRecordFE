@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Macchina } from '../macchina';
+import { Utente } from '../utente';
 import { MacchinaUtente } from '../macchina-utente';
 import { Prenotazioni } from '../prenotazioni';
 import { MacchineService } from '../macchine.service';
@@ -18,6 +19,7 @@ export class MacchineComponent implements OnInit {
   loading: Boolean = false;
   macchinaEsistente: Boolean = false;
   macchine: MacchinaUtente[] = [];
+  utenteAttivo: Utente = {nome:"", cognome: "", username:""};
   tipo: string = "AUTO";
   macchinaPersonale: Macchina = {nome: "Macchina test3", id: 0, proprietario:"Test", idProprietario: 1, username: "v", auto: true, andata: true,
                                     ritorno: true, postiAndata: 4, postiRitorno: 5,
@@ -34,15 +36,17 @@ export class MacchineComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    // TODO getMacchine();
-    //var callAllCar = this.macchineService.getAllMacchine();
     var callAllCarUte = this.macchineService.getAllMacchineUtenti();
+    var cattUtenteAttivo = this.macchineService.getUtenteByUsername(this.cookieService.get("username"));
 
-    forkJoin(callAllCarUte).subscribe( res => {
+    forkJoin(callAllCarUte, cattUtenteAttivo).subscribe( res => {
       console.log(res);
 
 
       this.macchine = res[0];
+      this.utenteAttivo = res[1];
+
+      this.cookieService.set("fullname", String(this.utenteAttivo.nome + " " + this.utenteAttivo.cognome));
 
       this.getMacchinaPersonale(this.macchine);
       this.loading = false;

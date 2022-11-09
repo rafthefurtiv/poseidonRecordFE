@@ -6,3 +6,9 @@ mat-card{
 button:disabled {
    background-color: #b3b3b3;
 }
+
+.posto-libero{
+  padding-left: 5px;
+  background-color:#0091ef;
+  border-radius: 5px;
+}

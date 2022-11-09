@@ -3,9 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Macchina } from './macchina';
+import { Utente } from './utente';
 import { MacchinaUtente } from './macchina-utente';
 import { Esito } from './esito';
 import { of } from 'rxjs';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,9 @@ export class MacchineService {
   //categorie: Observable<Array<Categorie>> = new Observable<Array<Categorie>>();
   //local: string = "http://195.20.241.70:8080/poseidonRecord";
   local: string = "http://localhost:8080/poseidonRecord";
+  //utente: Utente = {nome:"", cognome: "", username:""};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   getAllMacchine() {
     return this.http.get<Array<Macchina>>(this.local+"/macchine");
@@ -38,6 +41,14 @@ export class MacchineService {
 
   deleteMacchina(prop: number) {
     return this.http.delete<Esito>(this.local+"/macchine/macchina/utente/"+prop, {});
+  }
+
+  getUtente(username: string) {
+    return this.http.get<Utente>(this.local+"/utenti/utente/"+username);
+  }
+
+  getUtenteByUsername(username: string) {
+    return this.http.get<Utente>(this.local+"/utenti/utente/username/"+username);
   }
 
 }
