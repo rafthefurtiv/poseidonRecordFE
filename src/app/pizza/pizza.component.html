@@ -1,125 +1,219 @@
 
+<div>
+  <div class="row" style="text-align:center; border: 1px solid #ccc!important; border-radius:16px; padding:10px; padding-top:21px; margin:30px">
 
-<div class="row" style="text-align:center">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h1>Impasto base 1 teglia</h1>
-  </div>
-</div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <label>PROPORZIONI</label>
+      <input type="radio" value="P" name="tipo" [(ngModel)]="tipo">
+    </div>
 
-<div class="row" style="text-align:center">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <label>TEGLIE</label>
+      <input type="radio" value="T" name="tipo" [(ngModel)]="tipo">
+    </div>
 
-
-
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <label for="">Farina gr.: </label>
-    <input type="number" [(ngModel)]="farinaBase">
-  </div>
-
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <label for="">Idratazione : </label>
-    <input type="number" [(ngModel)]="idratazione">
-  </div>
-
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <label for="">Lievito gr.: </label>
-    <input type="number" [(ngModel)]="lievito">
-  </div>
-
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <label for="">Sale gr.: </label>
-    <input type="number" [(ngModel)]="sale">
-  </div>
-
-
-
-
-
-</div>
-
-
-
-<div class="row" style="text-align:center">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h1>Teglie</h1>
   </div>
 </div>
 
 
 
 
-<div class="row" style="text-align:center">
-  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-  </div>
-  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-    <button (click)="aggiungiTeglia()">Aggiungi teglia</button>
-  </div>
-  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-  </div>
-</div>
+<div *ngIf="tipo=='P'">
 
-<div class="row" *ngFor="let t of teglie; let i = index" style="text-align:center; border: 1px solid black; border-radius: 1px;">
-  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    <p for="">Tipo: </p>
-    <input type="radio" [value]="true" [attr.name]="i" (click)="quadrata(t, true)" checked>
-    <label for="">Quadrata</label>
-    <br>
-    <input type="radio" [value]="false" [attr.name]="i" (click)="quadrata(t, false)">
-    <label for="">Circolare </label>
-  </div>
-  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    <label for="" *ngIf="!t.quadrata">Raggio: </label>
-    <label for="" *ngIf="t.quadrata">Lato 1: </label>
-    <input type="number" [(ngModel)]="t.raggioLato1">
-  </div>
-  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" *ngIf="t.quadrata">
-    <div>
-      <label for="">Lato 2: </label>
-      <input type="number" [(ngModel)]="t.lato2">
+  <div class="row" style="text-align:center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1>BASE</h1>
     </div>
   </div>
-  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    <div>
-      <label for="">Impasto teglia: </label>
-      {{calcolaImpastoTeglia(t)}}
+
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Farina gr.: </label>
+      <input type="number" [(ngModel)]="base.farinaBase">
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Idratazione : </label>
+      <input type="number" [(ngModel)]="base.idratazione">
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Lievito gr.: </label>
+      <input type="number" [(ngModel)]="base.lievito">
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Sale gr.: </label>
+      <input type="number" [(ngModel)]="base.sale">
+    </div>
+  </div>
+
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1>PROPORZIONE</h1>
+    </div>
+  </div>
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Farina gr.: </label>
+      <input type="number" [(ngModel)]="proporzione.farina">
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Acqua gr.: </label>
+      <span >{{calcoloProporzioneAcqua()}}</span>
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Lievito gr.: </label>
+      <span >{{calcoloProporzioneLievito()}}</span>
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Sale gr.: </label>
+      <span >{{calcoloProporzioneSale()}}</span>
     </div>
   </div>
 
 </div>
 
 
-<div class="row" style="text-align:center">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h1>Risultato totale</h1>
-  </div>
-</div>
 
 
-<div class="row" style="text-align:center">
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    Farina
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    Acqua
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    Lievito
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    Sale
+
+
+
+
+
+
+
+<div *ngIf="tipo=='T'">
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1>Impasto base 1 teglia</h1>
+    </div>
   </div>
 
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    {{calcoloTotale().farina}}
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    {{calcoloTotale().acqua}}
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    {{calcoloTotale().lievito}}
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    {{calcoloTotale().sale}}
+  <div class="row" style="text-align:center">
+
+
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Farina gr.: </label>
+      <input type="number" [(ngModel)]="farinaBase">
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Idratazione : </label>
+      <input type="number" [(ngModel)]="idratazione">
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Lievito gr.: </label>
+      <input type="number" [(ngModel)]="lievito">
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <label for="">Sale gr.: </label>
+      <input type="number" [(ngModel)]="sale">
+    </div>
+
+
+
+
+
   </div>
 
+
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1>Teglie</h1>
+    </div>
+  </div>
+
+
+
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <button (click)="aggiungiTeglia()">Aggiungi teglia</button>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let t of teglie; let i = index" style="text-align:center; border: 1px solid black; border-radius: 1px;">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <p for="">Tipo: </p>
+      <input type="radio" [value]="true" [attr.name]="i" (click)="quadrata(t, true)" checked>
+      <label for="">Quadrata</label>
+      <br>
+      <input type="radio" [value]="false" [attr.name]="i" (click)="quadrata(t, false)">
+      <label for="">Circolare </label>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <label for="" *ngIf="!t.quadrata">Raggio: </label>
+      <label for="" *ngIf="t.quadrata">Lato 1: </label>
+      <input type="number" [(ngModel)]="t.raggioLato1">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" *ngIf="t.quadrata">
+      <div>
+        <label for="">Lato 2: </label>
+        <input type="number" [(ngModel)]="t.lato2">
+      </div>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <div>
+        <label for="">Impasto teglia: </label>
+        {{calcolaImpastoTeglia(t)}}
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1>Risultato totale</h1>
+    </div>
+  </div>
+
+
+  <div class="row" style="text-align:center">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      Farina
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      Acqua
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      Lievito
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      Sale
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      {{calcoloTotale().farina}}
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      {{calcoloTotale().acqua}}
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      {{calcoloTotale().lievito}}
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      {{calcoloTotale().sale}}
+    </div>
+
+
+  </div>
 
 </div>
