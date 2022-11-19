@@ -6,6 +6,8 @@ import { Prenotazioni } from '../prenotazioni';
 import { MacchineService } from '../macchine.service';
 import { forkJoin } from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { ErrordialogComponent } from '../errordialog/errordialog.component';
 
 @Component({
   selector: 'app-macchine',
@@ -21,14 +23,14 @@ export class MacchineComponent implements OnInit {
   macchine: MacchinaUtente[] = [];
   utenteAttivo: Utente = {nome:"", cognome: "", username:""};
   tipo: string = "AUTO";
-  macchinaPersonale: Macchina = {nome: "Macchina test3", id: 0, proprietario:"Test", idProprietario: 1, username: "v", auto: true, andata: true,
+  macchinaPersonale: Macchina = {nome: "Macchina test3", id: 0, proprietario:"Test", idProprietario: 1, username: "v", auto: "AUTO", andata: true,
                                     ritorno: true, postiAndata: 4, postiRitorno: 5,
                                     note: "test note"};
   prenotazione: Prenotazioni = {andataP: false, ritornoP: false};
 
 
 
-  constructor(private macchineService: MacchineService,  private cookieService: CookieService) {
+  constructor(private macchineService: MacchineService,  private cookieService: CookieService, public dialog: MatDialog) {
     //andata: Boolean;
   }
 
@@ -76,7 +78,12 @@ export class MacchineComponent implements OnInit {
     */
   }
 
-
+  openDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(ErrordialogComponent, {
+      width: '500px',
+      data: errorMessage,
+    });
+  }
 
   public getMacchinaPersonale(macchine: MacchinaUtente[]){
     this.macchinaEsistente = false;
@@ -110,7 +117,7 @@ export class MacchineComponent implements OnInit {
              this.prenotazione.ritornoP = false;
              this.refreshCars();
              },
-          err => {this.refreshCars();}
+          err => {    this.openDialog(err.error); this.refreshCars();}
         );
     }
     else{
@@ -119,7 +126,7 @@ export class MacchineComponent implements OnInit {
             this.prenotazione.andataP = false;
             this.prenotazione.ritornoP = false;
             this.refreshCars();},
-          err => {this.refreshCars();}
+          err => {this.openDialog(err.error); this.refreshCars();}
         );
     }
   }
@@ -128,7 +135,7 @@ export class MacchineComponent implements OnInit {
     this.loading = true;
     this.macchineService.deleteMacchina(this.cookieService.get("username")).subscribe(
       res => { this.macchinaEsistente = false; this.refreshCars();},
-      err => {this.refreshCars();}
+      err => {this.openDialog(err.error); this.refreshCars();}
     );
   }
 

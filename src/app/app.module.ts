@@ -28,6 +28,8 @@ import { HeaderComponent } from './header/header.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ErrordialogComponent } from './errordialog/errordialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { FooterComponent } from './footer/footer.component';
     VeicoloPasseggeriComponent,
     HeaderComponent,
     PizzaComponent,
-    FooterComponent
+    FooterComponent,
+    ErrordialogComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { FooterComponent } from './footer/footer.component';
     MatCardModule,
     MatAutocompleteModule,
     MatTableModule,
+    MatDialogModule,
     NgbModule,
     HttpClientModule,
     FormsModule,

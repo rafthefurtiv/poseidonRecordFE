@@ -1,10 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Macchina } from '../macchina';
 import { Utente } from '../utente';
+import { ErrordialogComponent } from '../errordialog/errordialog.component';
 import { MacchinaUtente } from '../macchina-utente';
 import { Prenotazioni } from '../prenotazioni';
 import {CookieService} from 'ngx-cookie-service';
 import { MacchineService } from '../macchine.service';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-macchina',
@@ -15,7 +18,7 @@ import { MacchineService } from '../macchine.service';
 
 export class MacchinaComponent implements OnInit {
 
-  @Input() macchina:  MacchinaUtente = {macchina: {nome: "Macchina test", proprietario:"Test", idProprietario: 1, username: "v", id: 0, auto: true, andata: true,
+  @Input() macchina:  MacchinaUtente = {macchina: {nome: "Macchina test", proprietario:"Test", idProprietario: 1, username: "v", id: 0, auto: "AUTO", andata: true,
                                                       ritorno: false, postiAndata: 4, postiRitorno: 5, note: "test"},
                                      macchineUtentiListAndata: ["Raf Barb", "Test test"], macchineUtentiListRitorno: ["Raf Barb", "Test test"]};
 
@@ -31,7 +34,8 @@ export class MacchinaComponent implements OnInit {
 
   utente: String = "";
 
-  constructor(private cookieService: CookieService, private macchineService: MacchineService) { }
+  constructor(private cookieService: CookieService, private macchineService: MacchineService,
+  public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.calcolaPrenotazione();
@@ -52,6 +56,14 @@ export class MacchinaComponent implements OnInit {
         this.prenotazione.ritornoP = true;
       }
     });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ErrordialogComponent, {
+      width: '250px',
+      data: {error:  'test'},
+    });
+
   }
 
   public entra(tragitto: number){

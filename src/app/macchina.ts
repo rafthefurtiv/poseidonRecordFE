@@ -5,7 +5,7 @@ export class Macchina {
     idProprietario: number = 0;
     id: number = 0;
     username: string = "";
-    auto: boolean = false;
+    auto: string = "";
     andata: boolean = false;
     ritorno: boolean = false;
     postiAndata: number = 0;
