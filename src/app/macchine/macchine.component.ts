@@ -40,6 +40,7 @@ export class MacchineComponent implements OnInit {
     var cattUtenteAttivo = this.macchineService.getUtenteByUsername(this.cookieService.get("username"));
 
     this.macchinaPersonale.username = this.cookieService.get("username");
+    //this.macchinaPersonale.auto = "AUTO";
 
     forkJoin(callAllCarUte, cattUtenteAttivo).subscribe( res => {
 
@@ -78,6 +79,7 @@ export class MacchineComponent implements OnInit {
 
 
   public getMacchinaPersonale(macchine: MacchinaUtente[]){
+    this.macchinaEsistente = false;
     macchine.forEach(mu => {
       if(mu.macchina.username == this.cookieService.get("username")){
         this.macchinaPersonale = mu.macchina;
@@ -101,25 +103,32 @@ export class MacchineComponent implements OnInit {
     this.loading = true;
 
     if(this.macchinaEsistente){
+        this.macchinaPersonale.proprietario = this.cookieService.get("username");
         this.macchineService.updateMacchina(this.macchinaPersonale).subscribe(
            res => {
+             this.prenotazione.andataP = false;
+             this.prenotazione.ritornoP = false;
              this.refreshCars();
              },
-          err => {console.log(err); this.loading = false;}
+          err => {this.refreshCars();}
         );
     }
     else{
         this.macchineService.saveMacchina(this.macchinaPersonale).subscribe(
-          res => {console.log(res); this.refreshCars();},
-          err => {console.log(err); this.loading = false;}
+          res => {
+            this.prenotazione.andataP = false;
+            this.prenotazione.ritornoP = false;
+            this.refreshCars();},
+          err => {this.refreshCars();}
         );
     }
   }
 
   public eliminaMacchina(){
+    this.loading = true;
     this.macchineService.deleteMacchina(this.cookieService.get("username")).subscribe(
       res => { this.macchinaEsistente = false; this.refreshCars();},
-      err => { this.loading = false;}
+      err => {this.refreshCars();}
     );
   }
 

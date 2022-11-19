@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 import { AtletiComponent } from './atleti/atleti.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTableModule} from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { AddRecordComponent } from './add-record/add-record.component';
@@ -54,7 +55,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatTableModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule
   ],
   providers: [CookieService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
