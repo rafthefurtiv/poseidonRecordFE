@@ -15,7 +15,7 @@ import {CookieService} from 'ngx-cookie-service';
 export class MacchineService {
   //categorie: Observable<Array<Categorie>> = new Observable<Array<Categorie>>();
   //local: string = "http://195.20.241.70:8080/poseidonRecord";
-  local: string = "http://localhost:8080/poseidonRecord";
+  local: string = "http://195.20.241.70:8080/poseidonRecord";
   //utente: Utente = {nome:"", cognome: "", username:""};
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
