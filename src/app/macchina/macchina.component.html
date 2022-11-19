@@ -14,10 +14,10 @@
           <p class="posto-libero" *ngFor="let f of [].constructor(macchina.macchina.postiAndata - macchina.macchineUtentiListAndata.length)">POSTO LIBERO</p>
         </mat-card-content>
         <mat-card-actions>
-          <button [disabled]="macchina.macchineUtentiListAndata.includes(this.getFullName()) || (prenotazione.andataP && !macchina.macchineUtentiListAndata.includes(this.getFullName()))" (click)="entra(1)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Entra in macchina">
+          <button [disabled]="getIfHasToRide() || macchina.macchineUtentiListAndata.includes(this.getFullName()) || (prenotazione.andataP && !macchina.macchineUtentiListAndata.includes(this.getFullName()))" (click)="entra(1)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Entra in macchina">
             Entra
           </button>
-          <button [disabled]="!macchina.macchineUtentiListAndata.includes(this.getFullName())" (click)="esci(1)"  type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+          <button [disabled]="getIfHasToRide() || !macchina.macchineUtentiListAndata.includes(this.getFullName())" (click)="esci(1)"  type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
             Esci
           </button>
         </mat-card-actions>
@@ -35,10 +35,10 @@
           </mat-card-content>
         </mat-card-content>
         <mat-card-actions>
-          <button [disabled]="macchina.macchineUtentiListRitorno.includes(this.getFullName()) || (prenotazione.ritornoP && !macchina.macchineUtentiListRitorno.includes(this.getFullName()))" (click)="entra(2)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
+          <button [disabled]="getIfHasToRide() || macchina.macchineUtentiListRitorno.includes(this.getFullName()) || (prenotazione.ritornoP && !macchina.macchineUtentiListRitorno.includes(this.getFullName()))" (click)="entra(2)" type="button" class="btn btn-outline-secondary mr-2" placement="left" ngbTooltip="Ricerca gare per atleta">
             Entra
           </button>
-          <button [disabled]="!macchina.macchineUtentiListRitorno.includes(this.getFullName())" (click)="esci(2)" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
+          <button [disabled]="getIfHasToRide() || !macchina.macchineUtentiListRitorno.includes(this.getFullName())" (click)="esci(2)" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Aggiungi gare" style="float: right;">
             Esci
           </button>
         </mat-card-actions>

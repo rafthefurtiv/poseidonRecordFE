@@ -60,7 +60,7 @@ export class MacchinaComponent implements OnInit {
       && this.macchina.macchineUtentiListAndata.length < this.macchina.macchina.postiAndata){
         this.macchina.macchineUtentiListAndata.push(this.getFullName());
 
-        this.macchineService.savePasseggero(this.getFullName().toString(), this.macchina.macchina.id, true, this.prenotazione.andataP).subscribe(
+        this.macchineService.savePasseggero(this.getUsername().toString(), this.macchina.macchina.id, true, this.macchina.macchineUtentiListRitorno.includes(this.getFullName())).subscribe(
           res => {console.log(res);},
           err => {console.log(err);}
         );
@@ -72,6 +72,12 @@ export class MacchinaComponent implements OnInit {
       if(!this.macchina.macchineUtentiListRitorno.includes(this.getFullName())
       && this.macchina.macchineUtentiListRitorno.length < this.macchina.macchina.postiRitorno){
         this.macchina.macchineUtentiListRitorno.push(this.getFullName());
+
+        this.macchineService.savePasseggero(this.getUsername().toString(), this.macchina.macchina.id, this.macchina.macchineUtentiListAndata.includes(this.getFullName()), true).subscribe(
+          res => {console.log(res);},
+          err => {console.log(err);}
+        );
+
         this.prenotazione.ritornoP = true;
       }
     }
@@ -81,12 +87,24 @@ export class MacchinaComponent implements OnInit {
     if(tragitto == 1){
       if(this.macchina.macchineUtentiListAndata.includes(this.getFullName())){
         this.macchina.macchineUtentiListAndata.splice(this.macchina.macchineUtentiListAndata.indexOf(this.getFullName(),1));
+
+        this.macchineService.savePasseggero(this.getUsername().toString(), this.macchina.macchina.id, false , this.macchina.macchineUtentiListRitorno.includes(this.getFullName())).subscribe(
+          res => {console.log(res);},
+          err => {console.log(err);}
+        );
+
         this.prenotazione.andataP = false;
       }
     }
     else if(tragitto == 2){
       if(this.macchina.macchineUtentiListRitorno.includes(this.getFullName())){
         this.macchina.macchineUtentiListRitorno.splice(this.macchina.macchineUtentiListRitorno.indexOf(this.getFullName(),1));
+
+        this.macchineService.savePasseggero(this.getUsername().toString(), this.macchina.macchina.id, this.macchina.macchineUtentiListAndata.includes(this.getFullName()), false).subscribe(
+          res => {console.log(res);},
+          err => {console.log(err);}
+        );
+
         this.prenotazione.ritornoP = false;
       }
     }
@@ -96,5 +114,19 @@ export class MacchinaComponent implements OnInit {
   public getFullName(){
     return this.cookieService.get("fullname");
   }
+  public getUsername(){
+    return this.cookieService.get("username");
+  }
+  public getIfHasToRide(){
+    var se = false;
+    this.macchine.forEach(mu => {
+      if(mu.macchina.username == this.cookieService.get("username")){
+        se = true;
+      }
+    });
+    return se;
+  }
+
+
 
 }

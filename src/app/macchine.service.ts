@@ -39,8 +39,8 @@ export class MacchineService {
     return this.http.post<Esito>(this.local+"/macchine/passeggero/"+pass+"/macchina/"+macch+"?andata="+andata+"&ritorno="+ritorno, null, {});
   }
 
-  deleteMacchina(prop: number) {
-    return this.http.delete<Esito>(this.local+"/macchine/macchina/utente/"+prop, {});
+  deleteMacchina(username: string) {
+    return this.http.delete<Esito>(this.local+"/macchine/macchina/utente/"+username, {});
   }
 
   getUtente(username: string) {
