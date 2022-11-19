@@ -27,6 +27,7 @@ import { VeicoloPasseggeriComponent } from './veicolo-passeggeri/veicolo-passegg
 import { HeaderComponent } from './header/header.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MacchinaComponent,
     VeicoloPasseggeriComponent,
     HeaderComponent,
-    PizzaComponent
+    PizzaComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
