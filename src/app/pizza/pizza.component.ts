@@ -16,6 +16,7 @@ export class PizzaComponent implements OnInit {
   teglie: Array<Teglia> = [];
   base: any = {farinaBase:400, idratazione:70, lievito: 1.6, sale:10};
   proporzione: any = {farina:400, acqua:0, lievito: 0, sale:0};
+  panetti: any = {numero:0, grammi:270};
 
   constructor() { }
 
@@ -84,6 +85,21 @@ export class PizzaComponent implements OnInit {
   }
   public calcoloProporzioneSale(){
     return this.proporzione.farina/this.base.farinaBase*this.base.sale;
+  }
+
+
+  // Panetti
+  public calcolaFarinaPanetti(){
+    return (this.panetti.numero * this.panetti.grammi) / (1+(this.base.idratazione/100));
+  }
+  public calcolaAcquaPanetti(){
+    return this.calcolaFarinaPanetti() * this.base.idratazione/100;
+  }
+  public calcoloLievitoPanetti(){
+    return this.calcolaFarinaPanetti()/this.base.farinaBase*this.base.lievito;
+  }
+  public calcoloSalePanetti(){
+    return this.calcolaFarinaPanetti()/this.base.farinaBase*this.base.sale;
   }
 
 }
