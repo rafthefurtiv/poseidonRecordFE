@@ -30,6 +30,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ErrordialogComponent } from './errordialog/errordialog.component';
+import { PalestraComponent } from './palestra/palestra.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { ErrordialogComponent } from './errordialog/errordialog.component';
     HeaderComponent,
     PizzaComponent,
     FooterComponent,
-    ErrordialogComponent
+    ErrordialogComponent,
+    PalestraComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import { ErrordialogComponent } from './errordialog/errordialog.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    PdfViewerModule
   ],
   providers: [CookieService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
