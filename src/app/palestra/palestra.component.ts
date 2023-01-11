@@ -7,13 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PalestraComponent implements OnInit {
 
-  title: string = "Scheda";
+  title: string = "SCHEDA PALESTRA";
   pdfSource: string = "../assets/scheda.pdf";
 
   constructor() { }
 
   ngOnInit(): void {
 
+  }
+
+  public downloadScheda(){
+    window.open(this.pdfSource, '_blank', 'width=1000, height=800');
   }
 
 }

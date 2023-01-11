@@ -1,6 +1,20 @@
 
-<div class="container">
-  <pdf-viewer [src]="pdfSource" style="display: block; min-height: 1400px">
-  </pdf-viewer>
+<div style="text-align: center;">
+  <h1>{{title}}</h1>
 </div>
+
+
+  <pdf-viewer [src]="pdfSource" style="display: block; min-height: 1150px" [fit-to-page]="true">
+  </pdf-viewer>
+
+  <div style="text-align: center;">
+    <button (click)="downloadScheda()" type="button" class="btn btn-outline-secondary mr-2">
+      Salva PDF
+    </button>
+  </div>
+
+
+
+
+
 
