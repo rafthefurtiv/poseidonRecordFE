@@ -15,15 +15,15 @@
 </div>
 
 <div class="row mt-2">
-  <div class="col-11 pl-4">
+  <div class="col-9 pl-4">
     <input style="width: 100%; height: 100%" type="text" [(ngModel)]="testo">
   </div>
-  <div class="col-1" *ngIf="owner">
+  <div class="col-3" *ngIf="owner">
     <button (click)="invia()" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Invia" style="float: right;">
       Invia
     </button>
   </div>
-  <div class="col-1" *ngIf="!owner">
+  <div class="col-3" *ngIf="!owner">
     <button (click)="carica()" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Carica" style="float: right;">
       Carica
     </button>

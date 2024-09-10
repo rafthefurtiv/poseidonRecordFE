@@ -29,12 +29,12 @@ export class ChatComponent implements OnInit {
       //this.messaggi.push({owner: 1, message: "test" });
 
       if(!this.owner){
-        this.owner = this.testo;
+        this.owner = this.testo.toLowerCase();
       }
 
       this.loading = true;
 
-      this.chatService.getAllMessages(this.owner)
+      this.chatService.getAllMessages(this.owner.toLowerCase())
       .subscribe( res => {
 
          this.messaggi = res;
@@ -44,11 +44,10 @@ export class ChatComponent implements OnInit {
 
 
       this.subscription = interval(10000).subscribe(x =>{
-                                this.chatService.getAllMessages(this.owner)
+                                this.chatService.getAllMessages(this.owner.toLowerCase())
                                 .subscribe( res => {
 
                                    this.messaggi = res;
-                                   this.testo = '';
                                    }
                                  );
       }
@@ -68,10 +67,10 @@ export class ChatComponent implements OnInit {
 
   invia(){
 
-    this.chatService.saveMessaggio(this.testo, this.owner).subscribe( res => {
+    this.chatService.saveMessaggio(this.testo, this.owner.toLowerCase()).subscribe( res => {
        this.testo = '';
 
-                                       this.chatService.getAllMessages(this.owner)
+                                       this.chatService.getAllMessages(this.owner.toLowerCase())
                                        .subscribe( res => {
 
                                           this.messaggi = res;
