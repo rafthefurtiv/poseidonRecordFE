@@ -32,6 +32,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ErrordialogComponent } from './errordialog/errordialog.component';
 import { PalestraComponent } from './palestra/palestra.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     PizzaComponent,
     FooterComponent,
     ErrordialogComponent,
-    PalestraComponent
+    PalestraComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

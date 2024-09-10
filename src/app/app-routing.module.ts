@@ -9,6 +9,7 @@ import { StartListComponent } from './start-list/start-list.component';
 import { MacchineComponent } from './macchine/macchine.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { PalestraComponent } from './palestra/palestra.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
 { path: '', component: LoginComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
 { path: 'macchine', component: MacchineComponent},
 { path: 'societari', component: SocietariComponent},
 { path: 'pizza', component: PizzaComponent},
-{ path: 'app-palestra', component: PalestraComponent}
+{ path: 'app-palestra', component: PalestraComponent},
+{ path: 'c', component: ChatComponent}
 ];
 
 @NgModule({

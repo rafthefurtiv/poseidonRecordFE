@@ -1,3 +1,7 @@
 mat-card{
   border: 1px solid gray;
 }
+
+.f-r {
+  float: right;
+}
