@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
 
 import { ChatService } from '../chat.service';
 
@@ -12,16 +12,34 @@ import { interval } from 'rxjs';
 export class ChatComponent implements OnInit {
 
 
+  //@ViewChildren('divToScroll') divToScroll: ElementRef;
+
   messaggi : any[] = [];
   testo : string = "";
   owner: string = "";
   subscription: any;
   loading: boolean = false;
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService) {
+
+  }
 
   ngOnInit(): void {
 
+  }
+
+
+  ricarica(){
+   this.chatService.getAllMessages(this.owner.toLowerCase())
+   .subscribe( res => {
+
+      this.messaggi = res;
+
+      let element = document.getElementById("chat");
+      if(element){
+        element.scrollTop = element.scrollHeight;
+      }
+      });
   }
 
 
@@ -40,6 +58,15 @@ export class ChatComponent implements OnInit {
          this.messaggi = res;
          this.testo = '';
          this.loading = false;
+
+
+          let element = document.getElementById("chat");
+          console.log(element);
+          if(element){
+            element.scrollIntoView();
+            console.log(element.scrollHeight);
+            console.log(element.scrollTop);
+          }
          });
 
 
@@ -48,6 +75,9 @@ export class ChatComponent implements OnInit {
                                 .subscribe( res => {
 
                                    this.messaggi = res;
+                                    let element = document.getElementById("chat");
+                                    if(element){
+                                    }
                                    }
                                  );
       }
@@ -75,6 +105,11 @@ export class ChatComponent implements OnInit {
 
                                           this.messaggi = res;
                                           this.testo = '';
+
+                                          let element = document.getElementById("chat");
+                                          if(element){
+                                            element.scrollTop = element.scrollHeight;
+                                          }
                                           console.log("ricarica")
                                           });
 

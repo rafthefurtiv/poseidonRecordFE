@@ -6,7 +6,7 @@
 </div>
 
 <div class="row">
-  <div class="col" style="height: 400px; overflow-y: scroll; width: 100%; ">
+  <div #divToScroll id="chat" class="col" style="height: 400px; overflow-y: auto; width: 100%; ">
     <div class="col mt-2" *ngFor="let m of messaggi" >
       <div style="text-align: left;" *ngIf="m.owner != owner"> {{m.messaggio}} </div>
       <div style="text-align: right;" *ngIf="m.owner == owner"> {{m.messaggio}} </div>
@@ -35,7 +35,7 @@
 
 <div class="row mt-2">
   <div class="col" *ngIf="owner">
-    <button (click)="carica()" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Carica">
+    <button (click)="ricarica()" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Carica">
       Ricarica
     </button>
   </div>
