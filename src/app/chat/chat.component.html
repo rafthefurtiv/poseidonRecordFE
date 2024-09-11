@@ -6,7 +6,8 @@
 </div>
 
 <div class="row">
-  <div #divToScroll id="chat" class="col" style="height: 400px; overflow-y: auto; width: 100%; ">
+  <div #divToScroll id="chat" class="col" style="height: 400px; width: 100%;
+display:flex, flex-direction: column-reverse; overflow-y: auto;">
     <div class="col mt-2" *ngFor="let m of messaggi" >
       <div style="text-align: left;" *ngIf="m.owner != owner"> {{m.messaggio}} </div>
       <div style="text-align: right;" *ngIf="m.owner == owner"> {{m.messaggio}} </div>
@@ -41,6 +42,15 @@
   </div>
 </div>
 
+<!--
+  <div class="row mt-2">
+    <div class="col" >
+      <button (click)="test()" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Carica">
+        test
+      </button>
+    </div>
+  </div>
+-->
 
 
 

@@ -12,13 +12,13 @@ import { interval } from 'rxjs';
 export class ChatComponent implements OnInit {
 
 
-  //@ViewChildren('divToScroll') divToScroll: ElementRef;
-
   messaggi : any[] = [];
   testo : string = "";
   owner: string = "";
   subscription: any;
   loading: boolean = false;
+
+  elem = document.getElementById("chat");
 
   constructor(private chatService: ChatService) {
 
@@ -26,6 +26,60 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+    this.messaggi.push({owner: 'r', messaggio: '.'});
+
+    //this.elem = document.getElementById("chat");
+    this.goToEnd();
   }
 
 
@@ -35,11 +89,24 @@ export class ChatComponent implements OnInit {
 
       this.messaggi = res;
 
+      this.goToEnd();
+      });
+  }
+
+
+  goToEnd(){
       let element = document.getElementById("chat");
+      console.log(element);
       if(element){
         element.scrollTop = element.scrollHeight;
+        console.log(element.scrollHeight);
+        console.log(element.scrollTop);
       }
-      });
+  }
+
+  test(){
+    this.messaggi.push({owner: 'r', messaggio: 'X'});
+    this.goToEnd();
   }
 
 
@@ -58,16 +125,10 @@ export class ChatComponent implements OnInit {
          this.messaggi = res;
          this.testo = '';
          this.loading = false;
+         this.goToEnd();
 
 
-          let element = document.getElementById("chat");
-          console.log(element);
-          if(element){
-            element.scrollIntoView();
-            console.log(element.scrollHeight);
-            console.log(element.scrollTop);
-          }
-         });
+          });
 
 
       this.subscription = interval(10000).subscribe(x =>{
@@ -75,15 +136,10 @@ export class ChatComponent implements OnInit {
                                 .subscribe( res => {
 
                                    this.messaggi = res;
-                                    let element = document.getElementById("chat");
-                                    if(element){
-                                    }
-                                   }
-                                 );
-      }
 
 
-      );
+                                   });
+      });
 
 
 
@@ -106,11 +162,7 @@ export class ChatComponent implements OnInit {
                                           this.messaggi = res;
                                           this.testo = '';
 
-                                          let element = document.getElementById("chat");
-                                          if(element){
-                                            element.scrollTop = element.scrollHeight;
-                                          }
-                                          console.log("ricarica")
+                                          this?.goToEnd();
                                           });
 
        }
