@@ -21,6 +21,10 @@ local: string = "http://195.20.241.70:8080/poseidonRecord";
       return this.http.get<Array<string>>(this.local+"/chat/messaggi/"+id);
     }
 
+    getNewMessages(id: string, idMessage: string) {
+      return this.http.get<Array<string>>(this.local+"/chat/messaggi/"+ id + "/new/" + idMessage);
+    }
+
     saveMessaggio(m: string, id: string) {
       return this.http.post<Array<string>>(this.local+"/chat/messaggi/"+id, m, {});
     }
