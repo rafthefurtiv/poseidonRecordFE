@@ -16,6 +16,8 @@ export class ChatComponent implements OnInit {
   testo : string = "";
   owner: string = "";
   subscription: any;
+  sub1: any;
+  sub2: any;
   loading: boolean = false;
 
   elem = document.getElementById("chat");
@@ -110,10 +112,11 @@ export class ChatComponent implements OnInit {
   }
 
 
-  getLastMessageID(){
-    if(this.messaggi && this.messaggi.length > 0){
-      return this.messaggi[this.messaggi.length-1].id;
+  getLastMessageID(mess:any){
+    if(mess && mess.length > 0){
+      return mess[mess.length-1].id;
     }
+    return 0;
   }
 
 
@@ -126,7 +129,7 @@ export class ChatComponent implements OnInit {
 
       this.loading = true;
 
-      this.chatService.getAllMessages(this.owner.toLowerCase())
+      this.sub1 = this.chatService.getAllMessages(this.owner.toLowerCase())
       .subscribe( res => {
 
          this.messaggi = res;
@@ -139,10 +142,13 @@ export class ChatComponent implements OnInit {
 
 
       this.subscription = interval(2000).subscribe(x =>{
-                                this.chatService.getNewMessages(this.owner.toLowerCase(), this.getLastMessageID())
+                                this.chatService.getNewMessages(this.owner.toLowerCase(), this.getLastMessageID(this.messaggi))
                                 .subscribe( res => {
 
-                                   this.messaggi.push(res);
+                                   if(res && res.length > 0){
+                                    this.messaggi.push(res);
+                                   }
+
 
 
                                    });
