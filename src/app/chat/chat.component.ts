@@ -101,11 +101,8 @@ export class ChatComponent implements OnInit {
 
   goToEnd(){
       let element = document.getElementById("chat");
-      console.log(element);
       if(element){
         element.scrollTop = element.scrollHeight;
-        console.log(element.scrollHeight);
-        console.log(element.scrollTop);
       }
   }
 
@@ -149,7 +146,7 @@ export class ChatComponent implements OnInit {
                                 .subscribe( res => {
 
                                    if(res && res.length > 0){
-                                    this.messaggi.concat(res);
+                                    this.messaggi.push(...res);
                                    }
 
                                    this.ultimoId = this.getLastMessageID(this.messaggi);
@@ -158,7 +155,7 @@ export class ChatComponent implements OnInit {
                                    }
 
 
-                                   });
+                                });
       });
 
 
@@ -175,14 +172,20 @@ export class ChatComponent implements OnInit {
     this.chatService.saveMessaggio(this.testo, this.owner.toLowerCase()).subscribe( res => {
        this.testo = '';
 
-                                       this.chatService.getAllMessages(this.owner.toLowerCase())
-                                       .subscribe( res => {
+                                this.chatService.getNewMessages(this.owner.toLowerCase(), this.ultimoId.toString())
+                                .subscribe( res => {
 
-                                          this.messaggi = res;
-                                          this.testo = '';
+                                   if(res && res.length > 0){
+                                    this.messaggi.push(...res);
+                                   }
 
-                                          this?.goToEnd();
-                                          });
+                                   this.ultimoId = this.getLastMessageID(this.messaggi);
+                                   if(!this.ultimoId){
+                                    this.ultimoId = 0;
+                                   }
+
+
+                                });
 
        }
      );
