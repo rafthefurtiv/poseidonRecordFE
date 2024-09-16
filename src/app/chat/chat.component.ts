@@ -19,6 +19,7 @@ export class ChatComponent implements OnInit {
   sub1: any;
   sub2: any;
   loading: boolean = false;
+  ultimoId: number = 0;
 
   elem = document.getElementById("chat");
 
@@ -91,6 +92,8 @@ export class ChatComponent implements OnInit {
 
       this.messaggi = res;
 
+      this.ultimoId = this.getLastMessageID(this.messaggi);
+
       this.goToEnd();
       });
   }
@@ -136,19 +139,23 @@ export class ChatComponent implements OnInit {
          this.testo = '';
          this.loading = false;
          this.goToEnd();
-
+         this.ultimoId = this.getLastMessageID(this.messaggi);
 
           });
 
 
       this.subscription = interval(2000).subscribe(x =>{
-                                this.chatService.getNewMessages(this.owner.toLowerCase(), this.getLastMessageID(this.messaggi))
+                                this.chatService.getNewMessages(this.owner.toLowerCase(), this.ultimoId.toString())
                                 .subscribe( res => {
 
                                    if(res && res.length > 0){
-                                    this.messaggi.push(res);
+                                    this.messaggi.concat(res);
                                    }
 
+                                   this.ultimoId = this.getLastMessageID(this.messaggi);
+                                   if(!this.ultimoId){
+                                    this.ultimoId = 0;
+                                   }
 
 
                                    });
