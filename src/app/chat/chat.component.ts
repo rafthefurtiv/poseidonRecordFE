@@ -20,6 +20,7 @@ export class ChatComponent implements OnInit {
   sub2: any;
   loading: boolean = false;
   ultimoId: number = 0;
+  semaforo = true;
 
   elem = document.getElementById("chat");
 
@@ -145,15 +146,19 @@ export class ChatComponent implements OnInit {
                                 this.chatService.getNewMessages(this.owner.toLowerCase(), this.ultimoId.toString())
                                 .subscribe( res => {
 
-                                   if(res && res.length > 0){
-                                    this.messaggi.push(...res);
-                                   }
+                                  if(this.semaforo){
+                                     this.semaforo = false;
+                                     if(res && res.length > 0){
+                                      this.messaggi.push(...res);
+                                     }
 
-                                   this.ultimoId = this.getLastMessageID(this.messaggi);
-                                   if(!this.ultimoId){
-                                    this.ultimoId = 0;
-                                   }
+                                     this.ultimoId = this.getLastMessageID(this.messaggi);
+                                     if(!this.ultimoId){
+                                      this.ultimoId = 0;
+                                     }
 
+                                     this.semaforo = true;
+                                  }
 
                                 });
       });
@@ -175,14 +180,24 @@ export class ChatComponent implements OnInit {
                                 this.chatService.getNewMessages(this.owner.toLowerCase(), this.ultimoId.toString())
                                 .subscribe( res => {
 
-                                   if(res && res.length > 0){
-                                    this.messaggi.push(...res);
+
+                                   if(this.semaforo){
+                                      this.semaforo = false;
+                                      if(res && res.length > 0){
+                                       this.messaggi.push(...res);
+                                      }
+
+                                      this.ultimoId = this.getLastMessageID(this.messaggi);
+                                      if(!this.ultimoId){
+                                        this.ultimoId = 0;
+                                      }
+
+                                      this.semaforo = true;
                                    }
 
-                                   this.ultimoId = this.getLastMessageID(this.messaggi);
-                                   if(!this.ultimoId){
-                                    this.ultimoId = 0;
-                                   }
+
+
+
 
 
                                 });
