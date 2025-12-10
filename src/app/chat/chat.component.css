@@ -1,0 +1,21 @@
+.chat-bubble {
+  background: #74abff85;
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 100%;      /* evita che sfori */
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.chat-bubble-me {
+  background: #d1ffdb81;
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 100%;      /* evita che sfori */
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.chat{
+  background: #a0dcff25;
+}

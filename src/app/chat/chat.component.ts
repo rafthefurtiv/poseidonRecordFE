@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChildren, ViewChild } from '@angular/core';
 
 import { ChatService } from '../chat.service';
 
@@ -11,6 +11,7 @@ import { interval } from 'rxjs';
 })
 export class ChatComponent implements OnInit {
 
+  @ViewChild('chat') private divToScroll!: ElementRef;
 
   messaggi : any[] = [];
   testo : string = "";
@@ -29,60 +30,12 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-    this.messaggi.push({owner: 'r', messaggio: '.'});
-
     //this.elem = document.getElementById("chat");
+    this.goToEnd();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
     this.goToEnd();
   }
 
@@ -97,6 +50,13 @@ export class ChatComponent implements OnInit {
 
       this.goToEnd();
       });
+  }
+
+  private scrollToBottom(): void {
+    try {
+      this.divToScroll.nativeElement.scrollTop =
+        this.divToScroll.nativeElement.scrollHeight;
+    } catch (err) {}
   }
 
 
@@ -121,6 +81,20 @@ export class ChatComponent implements OnInit {
   }
 
 
+  debugResponse(){
+    const debugListMessages = [];
+
+    for (let index = 0; index < 50; index++) {
+          debugListMessages.push({
+            "id": index,
+            "messaggio": "Test ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"+index,
+            "owner": index % 2 === 0 ? "r" : "l",
+            "timestamp": "2025-12-10T14:29:39.000+00:00"
+          });
+    }
+    return debugListMessages;
+  }
+
   carica(){
       //this.messaggi.push({owner: 1, message: "test" });
 
@@ -134,33 +108,36 @@ export class ChatComponent implements OnInit {
       .subscribe( res => {
 
          this.messaggi = res;
+         //this.messaggi = this.debugResponse();
          this.testo = '';
          this.loading = false;
          this.goToEnd();
+         this.scrollToBottom();
          this.ultimoId = this.getLastMessageID(this.messaggi);
 
-          });
+        });
 
 
       this.subscription = interval(2000).subscribe(x =>{
-                                this.chatService.getNewMessages(this.owner.toLowerCase(), this.ultimoId.toString())
-                                .subscribe( res => {
+        this.chatService.getNewMessages(this.owner.toLowerCase(), this.ultimoId.toString())
+        .subscribe( res => {
 
-                                  if(this.semaforo){
-                                     this.semaforo = false;
-                                     if(res && res.length > 0){
-                                      this.messaggi.push(...res);
-                                     }
+          if(this.semaforo){
+              this.semaforo = false;
+              if(res && res.length > 0){
+                this.messaggi.push(...res);
+                this.goToEnd();
+              }
 
-                                     this.ultimoId = this.getLastMessageID(this.messaggi);
-                                     if(!this.ultimoId){
-                                      this.ultimoId = 0;
-                                     }
+              this.ultimoId = this.getLastMessageID(this.messaggi);
+              if(!this.ultimoId){
+                this.ultimoId = 0;
+              }
 
-                                     this.semaforo = true;
-                                  }
+              this.semaforo = true;
+          }
 
-                                });
+        });
       });
 
 
