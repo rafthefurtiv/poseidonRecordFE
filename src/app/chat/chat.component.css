@@ -36,6 +36,9 @@
 .bubble.them{background:#fff;border-top-left-radius:0}
 .bubble.me{background:#dcf8c6;border-top-right-radius:0}
 
+.bubble .bubble-text{display:block}
+.bubble.me .bubble-from{display:none}
+
 .bubble.them::before,
 .bubble.me::before{
   content:"";position:absolute;top:0;width:0;height:0;
@@ -76,7 +79,57 @@
 .btn-circle:active{transform:scale(.95)}
 .btn-send{background:#25d366}
 .btn-load{background:#075e54}
-.btn-reload{background:#34b7f1;margin:10px auto 0;display:flex}
+.btn-reload{background:#34b7f1}
+.btn-clean{background:#e53935}
+.btn-mode{background:#6c757d}
+.btn-mode.active{background:#075e54}
+.bottom-actions{display:flex;justify-content:center;gap:12px;margin-top:10px}
+
+/* === Modalità tabella (solo per admin) === */
+.mode-table .chat-header{
+  background:#f5f5f5;color:#333;padding:6px 10px;
+  border-radius:0;box-shadow:none;font-size:13px;
+}
+.mode-table .chat-header .avatar,
+.mode-table .chat-header .status,
+.mode-table .emoji-panel,
+.mode-table .btn-icon{display:none}
+.mode-table .chat{
+  background:#fff;background-image:none;box-shadow:none;
+  border:1px solid #e0e0e0;border-radius:0;padding:0 !important;
+}
+.mode-table .msg-row{
+  display:flex;flex-direction:row;justify-content:flex-start;
+  margin:0;border-bottom:1px solid #eee;align-items:baseline;
+}
+.mode-table .msg-row:hover{background:#fafafa}
+.mode-table .bubble{
+  display:flex;flex-direction:row;align-items:baseline;gap:10px;
+  width:100%;max-width:100%;padding:4px 10px;
+  background:transparent !important;border-radius:0;box-shadow:none;
+  font-size:13px;color:#222;
+}
+.mode-table .bubble::before{display:none}
+.mode-table .bubble-from{
+  display:inline-block !important;
+  flex:0 0 90px;font-size:12px;font-weight:600;color:#555;
+  margin:0;text-transform:lowercase;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.mode-table .bubble-text{
+  flex:1;white-space:pre-wrap;word-break:break-word;
+}
+.mode-table .bubble .time{
+  position:static;flex:0 0 auto;color:#999;font-size:11px;
+}
+.mode-table .input-bar{
+  background:#fff;border:1px solid #e0e0e0;border-radius:0;
+  margin-top:0;padding:4px 6px;
+}
+.mode-table .input-bar input{font-size:13px}
+.mode-table .btn-circle.btn-send{width:32px;height:32px;font-size:13px}
+.mode-table .bottom-actions{margin-top:4px;gap:6px}
+.mode-table .bottom-actions .btn-circle{width:30px;height:30px;font-size:12px}
 
 .btn-icon{
   width:38px;height:38px;border-radius:50%;border:none;background:transparent;

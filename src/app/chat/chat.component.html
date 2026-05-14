@@ -4,10 +4,12 @@
   </div>
 </div>
 
+<div [class.mode-table]="tableMode">
+
 <div class="chat-header" *ngIf="entered">
   <div class="avatar">{{ owner.charAt(0) }}</div>
   <div style="flex:1">
-    <div>Chat globale</div>
+    <div>{{ tableMode ? 'Globale' : 'Chat globale' }}</div>
     <div class="status">
       <span *ngIf="connectionState === RxStompState.OPEN">online</span>
       <span *ngIf="connectionState === RxStompState.CONNECTING">connessione…</span>
@@ -22,8 +24,8 @@
        style="height: 68%; display:flex; flex-direction: column; overflow-y: auto;">
     <div *ngFor="let m of messaggi" class="msg-row" [class.me]="m.from == owner">
       <div class="bubble" [class.me]="m.from == owner" [class.them]="m.from != owner">
-        <div class="bubble-from" *ngIf="m.from != owner">{{ m.from }}</div>
-        {{ m.messaggio }}
+        <div class="bubble-from">{{ m.from }}</div>
+        <span class="bubble-text">{{ m.messaggio }}</span>
         <span class="time">{{ m.timestamp?.substring(11, 16) }}</span>
       </div>
     </div>
@@ -40,18 +42,34 @@
     </button>
 
     <input (keydown.enter)="invia()" type="text" [(ngModel)]="testo"
-           placeholder="Scrivi un messaggio">
+           [placeholder]="tableMode ? 'Inserisci un record' : 'Scrivi un messaggio'">
 
     <button (click)="invia()" type="button"
-            class="btn-circle btn-send" ngbTooltip="Invia" placement="left">
-      <i class="fas fa-paper-plane"></i>
+            class="btn-circle btn-send"
+            [ngbTooltip]="tableMode ? 'Inserisci' : 'Invia'" placement="left">
+      <i class="fas" [class.fa-paper-plane]="!tableMode" [class.fa-plus]="tableMode"></i>
     </button>
   </div>
 
-  <button (click)="ricarica()" type="button"
-          class="btn-circle btn-reload" ngbTooltip="Ricarica">
-    <i class="fas fa-sync-alt"></i>
-  </button>
+  <div class="bottom-actions">
+    <button (click)="ricarica()" type="button"
+            class="btn-circle btn-reload"
+            [ngbTooltip]="tableMode ? 'Aggiorna' : 'Ricarica'">
+      <i class="fas fa-sync-alt"></i>
+    </button>
+    <button *ngIf="isAdmin" (click)="pulisci()" type="button"
+            class="btn-circle btn-clean"
+            [ngbTooltip]="tableMode ? 'Tronca a 10 record' : 'Tieni solo ultimi 10'">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+    <button *ngIf="isAdmin" (click)="toggleTableMode()" type="button"
+            class="btn-circle btn-mode" [class.active]="tableMode"
+            [ngbTooltip]="tableMode ? 'Vista chat' : 'Vista tabella'">
+      <i class="fas" [class.fa-table]="!tableMode" [class.fa-comments]="tableMode"></i>
+    </button>
+  </div>
+</div>
+
 </div>
 
 <ng-template #loginBox>

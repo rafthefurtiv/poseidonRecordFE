@@ -24,4 +24,9 @@ export class ChatService {
     const params = new HttpParams().set('owner', owner);
     return this.http.get<ChatMessage[]>(this.base + '/chat/storico', { params });
   }
+
+  cleanup(owner: string, keep: number = 10): Observable<number> {
+    const params = new HttpParams().set('owner', owner).set('keep', keep.toString());
+    return this.http.delete<number>(this.base + '/chat/cleanup', { params });
+  }
 }
