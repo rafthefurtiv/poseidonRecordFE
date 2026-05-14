@@ -1,186 +1,116 @@
-import { Component, OnInit, ElementRef, ViewChildren, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { ChatService } from '../chat.service';
-
-import { interval } from 'rxjs';
+import { ChatService, ChatMessage } from '../chat.service';
+import { ChatRealtimeService } from './chat-realtime.service';
+import { RxStompState } from '@stomp/rx-stomp';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
-  @ViewChild('chat') private divToScroll!: ElementRef;
+  @ViewChild('divToScroll') private divToScroll!: ElementRef;
 
-  messaggi : any[] = [];
-  testo : string = "";
-  owner: string = "";
-  subscription: any;
-  sub1: any;
-  sub2: any;
+  messaggi: ChatMessage[] = [];
+  testo: string = '';
+  owner: string = '';
+  entered: boolean = false;
   loading: boolean = false;
-  ultimoId: number = 0;
-  semaforo = true;
 
-  elem = document.getElementById("chat");
+  showEmoji: boolean = false;
+  emojiList: string[] = [
+    '😀','😁','😂','🤣','😃','😄','😅','😊','😍','😘',
+    '😎','🤩','🥳','😜','🤔','🤨','😏','😢','😭','😡',
+    '🥺','😱','😴','🤤','🤗','🤐','😬','🙄','😇','🤯',
+    '👍','👎','👏','🙏','💪','🤝','✌️','👌','🤞','🫶',
+    '❤️','🧡','💛','💚','💙','💜','🖤','💔','💯','🔥',
+    '🎉','✨','⭐','🌟','💥','💩','🍕','🍺','☕','🚀'
+  ];
 
-  constructor(private chatService: ChatService) {
+  connectionState: RxStompState = RxStompState.CLOSED;
+  readonly RxStompState = RxStompState;
 
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private chatService: ChatService,
+    private realtime: ChatRealtimeService
+  ) {}
+
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.realtime.disconnect();
   }
 
-  ngOnInit(): void {
-    //this.elem = document.getElementById("chat");
-    this.goToEnd();
-  }
+  carica(): void {
+    const name = (this.owner || '').trim();
+    if (!name) return;
+    this.owner = name.toLowerCase();
+    this.entered = true;
+    this.loading = true;
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-    this.goToEnd();
-  }
+    this.chatService.getStorico()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => {
+        this.messaggi = res || [];
+        this.loading = false;
+        setTimeout(() => this.goToEnd(), 0);
+      });
 
+    this.realtime.connect();
 
-  ricarica(){
-   this.chatService.getAllMessages(this.owner.toLowerCase())
-   .subscribe( res => {
+    this.realtime.connectionState$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(s => this.connectionState = s);
 
-      this.messaggi = res;
-
-      this.ultimoId = this.getLastMessageID(this.messaggi);
-
-      this.goToEnd();
+    this.realtime.stream$()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(m => {
+        const stickToBottom = this.isAtBottom();
+        this.messaggi.push(m);
+        if (stickToBottom) {
+          setTimeout(() => this.goToEnd(), 0);
+        }
       });
   }
 
-  private scrollToBottom(): void {
-    try {
-      this.divToScroll.nativeElement.scrollTop =
-        this.divToScroll.nativeElement.scrollHeight;
-    } catch (err) {}
+  ricarica(): void {
+    if (!this.owner) return;
+    this.chatService.getStorico()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => this.messaggi = res || []);
   }
 
-
-  goToEnd(){
-      let element = document.getElementById("chat");
-      if(element){
-        element.scrollTop = element.scrollHeight;
-      }
+  invia(): void {
+    const t = (this.testo || '').trim();
+    if (!t) return;
+    this.realtime.send(this.owner, t);
+    this.testo = '';
   }
 
-  test(){
-    this.messaggi.push({owner: 'r', messaggio: 'X'});
-    this.goToEnd();
+  toggleEmoji(): void {
+    this.showEmoji = !this.showEmoji;
   }
 
-
-  getLastMessageID(mess:any){
-    if(mess && mess.length > 0){
-      return mess[mess.length-1].id;
-    }
-    return 0;
+  addEmoji(e: string): void {
+    this.testo = (this.testo || '') + e;
   }
 
-
-  debugResponse(){
-    const debugListMessages = [];
-
-    for (let index = 0; index < 50; index++) {
-          debugListMessages.push({
-            "id": index,
-            "messaggio": "Test ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"+index,
-            "owner": index % 2 === 0 ? "r" : "l",
-            "timestamp": "2025-12-10T14:29:39.000+00:00"
-          });
-    }
-    return debugListMessages;
+  isAtBottom(): boolean {
+    const el = this.divToScroll?.nativeElement;
+    if (!el) return false;
+    return el.scrollHeight - el.scrollTop - el.clientHeight < 80;
   }
 
-  carica(){
-      //this.messaggi.push({owner: 1, message: "test" });
-
-      if(!this.owner){
-        this.owner = this.testo.toLowerCase();
-      }
-
-      this.loading = true;
-
-      this.sub1 = this.chatService.getAllMessages(this.owner.toLowerCase())
-      .subscribe( res => {
-
-         this.messaggi = res;
-         //this.messaggi = this.debugResponse();
-         this.testo = '';
-         this.loading = false;
-         this.goToEnd();
-         this.scrollToBottom();
-         this.ultimoId = this.getLastMessageID(this.messaggi);
-
-        });
-
-
-      this.subscription = interval(2000).subscribe(x =>{
-        this.chatService.getNewMessages(this.owner.toLowerCase(), this.ultimoId.toString())
-        .subscribe( res => {
-
-          if(this.semaforo){
-              this.semaforo = false;
-              if(res && res.length > 0){
-                this.messaggi.push(...res);
-                this.goToEnd();
-              }
-
-              this.ultimoId = this.getLastMessageID(this.messaggi);
-              if(!this.ultimoId){
-                this.ultimoId = 0;
-              }
-
-              this.semaforo = true;
-          }
-
-        });
-      });
-
-
-
-
+  private goToEnd(): void {
+    const el = this.divToScroll?.nativeElement;
+    if (el) el.scrollTop = el.scrollHeight;
   }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  invia(){
-
-    this.chatService.saveMessaggio(this.testo, this.owner.toLowerCase()).subscribe( res => {
-       this.testo = '';
-
-                                this.chatService.getNewMessages(this.owner.toLowerCase(), this.ultimoId.toString())
-                                .subscribe( res => {
-
-
-                                   if(this.semaforo){
-                                      this.semaforo = false;
-                                      if(res && res.length > 0){
-                                       this.messaggi.push(...res);
-                                      }
-
-                                      this.ultimoId = this.getLastMessageID(this.messaggi);
-                                      if(!this.ultimoId){
-                                        this.ultimoId = 0;
-                                      }
-
-                                      this.semaforo = true;
-                                   }
-
-
-
-
-
-
-                                });
-
-       }
-     );
-  }
-
 }

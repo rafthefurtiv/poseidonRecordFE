@@ -1,90 +1,69 @@
-<div class="center" style="padding: 300px; width: 300px" *ngIf="loading">
-  <div class="spinner-border text-primary" role="status">
+<div class="loading-wrap" *ngIf="loading">
+  <div class="spinner-border text-success" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </div>
 
-<div class="mt-4 chat">
-</div>
-
-<div #divToScroll class="col chat" id="chat" style="height: 68%; width: 100%;
-    display:flex; flex-direction: column; overflow-y: auto;">
-  <div *ngFor="let m of messaggi" >
-
-    <div class="row">
-
-      <div class="col-6 mt-2" *ngIf="m.owner != owner">
-        <div class="chat-bubble" style="text-align: left;"> {{m.messaggio}} 
-          <div style="text-align: right;">
-            <small> {{m.timestamp.substring(11, 16)}}</small>
-          </div>
-        </div>
-        
-      </div>
-
-      <div class="col-7 mt-2" *ngIf="m.owner == owner">
-      </div>
-
-      <div class="col-5 mt-2" *ngIf="m.owner == owner">
-        <div class="chat-bubble-me" style="text-align: left;"> {{m.messaggio}} 
-          <div style="text-align: right;">
-            <small> {{m.timestamp.substring(11, 16)}}</small>
-          </div>
-        </div>
-
-      </div>
-      
+<div class="chat-header" *ngIf="entered">
+  <div class="avatar">{{ owner.charAt(0) }}</div>
+  <div style="flex:1">
+    <div>Chat globale</div>
+    <div class="status">
+      <span *ngIf="connectionState === RxStompState.OPEN">online</span>
+      <span *ngIf="connectionState === RxStompState.CONNECTING">connessione…</span>
+      <span *ngIf="connectionState === RxStompState.CLOSING">disconnessione…</span>
+      <span *ngIf="connectionState === RxStompState.CLOSED">offline</span>
     </div>
   </div>
 </div>
 
-<div class="row mt-3">
-  <div class="col-9 pl-4 pr-1">
-    <input (keydown.enter)="invia()" style="width: 100%; height: 100%; border-radius: 10px;" type="text" [(ngModel)]="testo">
+<div *ngIf="entered; else loginBox">
+  <div #divToScroll class="chat" id="chat"
+       style="height: 68%; display:flex; flex-direction: column; overflow-y: auto;">
+    <div *ngFor="let m of messaggi" class="msg-row" [class.me]="m.from == owner">
+      <div class="bubble" [class.me]="m.from == owner" [class.them]="m.from != owner">
+        <div class="bubble-from" *ngIf="m.from != owner">{{ m.from }}</div>
+        {{ m.messaggio }}
+        <span class="time">{{ m.timestamp?.substring(11, 16) }}</span>
+      </div>
+    </div>
   </div>
-  <div class="col-3 d-flex pl-0 pr-4" *ngIf="owner">
-    <button (click)="invia()" type="button" class="btn btn-success btn-lg btn-block" placement="right" ngbTooltip="Invia" style="float: right;">
-      Invia
+
+  <div class="emoji-panel" *ngIf="showEmoji">
+    <span *ngFor="let e of emojiList" class="emoji-item" (click)="addEmoji(e)">{{ e }}</span>
+  </div>
+
+  <div class="input-bar">
+    <button (click)="toggleEmoji()" type="button"
+            class="btn-icon" [class.active]="showEmoji" ngbTooltip="Emoji">
+      <i class="far fa-smile"></i>
+    </button>
+
+    <input (keydown.enter)="invia()" type="text" [(ngModel)]="testo"
+           placeholder="Scrivi un messaggio">
+
+    <button (click)="invia()" type="button"
+            class="btn-circle btn-send" ngbTooltip="Invia" placement="left">
+      <i class="fas fa-paper-plane"></i>
     </button>
   </div>
-  <div class="col-3 d-flex pl-0 pr-4" *ngIf="!owner">
-    <button (click)="carica()" type="button" class="btn btn-primary btn-lg btn-block" placement="left" ngbTooltip="Carica">
-      Carica
+
+  <button (click)="ricarica()" type="button"
+          class="btn-circle btn-reload" ngbTooltip="Ricarica">
+    <i class="fas fa-sync-alt"></i>
+  </button>
+</div>
+
+<ng-template #loginBox>
+  <div class="login-box">
+    <h3>Entra nella chat</h3>
+    <input class="login-input" type="text" [(ngModel)]="owner"
+           placeholder="Il tuo nome"
+           (keydown.enter)="carica()">
+    <button (click)="carica()" type="button"
+            class="btn btn-success btn-block"
+            [disabled]="!owner">
+      <i class="fas fa-sign-in-alt"></i>&nbsp; Entra
     </button>
   </div>
-</div>
-
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4 align-self-center" *ngIf="owner">
-      <button (click)="ricarica()" type="button" class="btn btn-info btn-lg btn-block" ngbTooltip="Carica">
-        Ricarica
-      </button>
-    </div>
-    <div class="col-4"></div>
-  </div>
-</div>
-
-
-
-<!--
-  <div class="row mt-2">
-    <div class="col" >
-      <button (click)="test()" type="button" class="btn btn-outline-secondary mr-2" placement="right" ngbTooltip="Carica">
-        test
-      </button>
-    </div>
-  </div>
--->
-
-
-
-
-
-
-
-
-
-
-
+</ng-template>

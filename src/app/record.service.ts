@@ -11,6 +11,7 @@ import { Categorie } from './categorie';
 import { Atleta } from './atleta';
 import { Esito } from './esito';
 import { of } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,7 @@ export class RecordService {
   stiliData: Array<Stili> = [];
   categorie: Observable<Array<Categorie>> = new Observable<Array<Categorie>>();
   records: Array<Record> = [];
-  local: string = "http://195.20.241.70:8080/poseidonRecord";
-  //local: string = "http://localhost:8080/poseidonRecord";
+  local: string = environment.apiBaseUrl;
   stiliCaricati: boolean = false;
   categorieCaricate: boolean = false;
 
