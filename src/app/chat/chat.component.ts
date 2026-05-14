@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.entered = true;
     this.loading = true;
 
-    this.chatService.getStorico()
+    this.chatService.getStorico(this.owner)
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => {
         this.messaggi = res || [];
@@ -83,7 +83,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ricarica(): void {
     if (!this.owner) return;
-    this.chatService.getStorico()
+    this.chatService.getStorico(this.owner)
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => this.messaggi = res || []);
   }
